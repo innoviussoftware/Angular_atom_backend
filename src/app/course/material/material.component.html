@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h3 class="page-title">
+    Manage materials
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+      <li class="breadcrumb-item"><a routerLink="/courses">Courses</a></li>
+      <li class="breadcrumb-item"><a routerLink="/courses/edit/{{ id }}">Previous Course</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Materials</li>
+    </ol>
+  </nav>
+</div>
+<div class="row">
+  <div class="col grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form class="forms-sample" id="material_form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Choose Materials</label><span class="text-danger">*</span>
+                <input type="file" #material_input class="form-control file-upload-info" multiple name="materials[]" (change)="onFileChange($event)">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+          <a class="btn btn-light" routerLink='/courses/edit/{{ id }}'>Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-3" *ngFor="let material of materials">
+            <img src="{{ material.file }}" class="img-fluid"/>
+            <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon delete_btn"  (click)="delete(material)">
+              <i class="mdi mdi-delete-forever"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+
+  <div class="page-header">
+    <h3 class="page-title">
+      Add New Category
+    </h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+        <li class="breadcrumb-item"><a routerLink="/categories">Categories</a></li>
+        <li class="breadcrumb-item active" aria-current="page">New</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <form class="forms-sample" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="exampleInputName1">Name</label><span class="text-danger">*</span>
+              <input type="text" class="form-control" formControlName="name"  placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail3">Description</label>
+              <textarea class="form-control" rows="8" cols="80" formControlName="description" ></textarea>
+            </div>
+            <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+            <a class="btn btn-light" routerLink='/categories'>Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

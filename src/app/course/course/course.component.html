@@ -1,0 +1,30 @@
+  <div class="page-header">
+    <h3 class="page-title">
+      Course Details
+    </h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+        <li class="breadcrumb-item"><a routerLink="/courses">Courses</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Single Course</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ course.image }}"  *ngIf="course.image" class="img-fluid"/>
+          <h2 class="section-title">{{course.name}}</h2>
+          <div class="text-muted mb-2">
+            <i class="mdi mdi-account-circle text-primary"></i> {{ course.user.name }}
+            <small><i class="mdi mdi-checkbox-blank-circle text-muted"></i></small>&nbsp;
+            <i class="mdi mdi-clock text-primary"></i> {{ course.duration }} Months
+            </div>
+
+          <h4>Description</h4>
+          <p class="text-muted">{{course.long_description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>

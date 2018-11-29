@@ -1,0 +1,64 @@
+<div class="page-header">
+  <h3 class="page-title">
+    Add New Course
+  </h3>
+  <button type="button" class="btn btn-inverse-success btn-fw btn-sm" routerLink="/courses/edit/{{ id }}/materials">Manage Materials</button>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+      <li class="breadcrumb-item"><a routerLink="/courses">Courses</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add New</li>
+    </ol>
+  </nav>
+</div>
+<div class="row">
+  <div class="col grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form class="forms-sample" [formGroup]="editForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <input type="hidden" formControlName="id" name="id" />
+          <input type="hidden" formControlName="user_id" name="user_id" />
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="exampleInputName1">Name</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="name" name="name">
+              </div>
+              <div class="form-group">
+                <label>Category</label><span class="text-danger">*</span>
+                <select class="form-control" formControlName="category_id" name="category_id">
+                  <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.name }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Image</label>
+                <input type="file" class="form-control"  (change)="onFileChange($event)"  name="image">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Price(AED)</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="price" name="price" >
+              </div>
+              <div class="form-group">
+                <label>Duration (In Months)</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="duration" name="duration">
+              </div>
+              <div class="form-group">
+                <label>Short Description</label>
+                <input type="text" class="form-control" formControlName="short_description" name="short_description">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail3">Long Description</label>
+            <textarea class="form-control" rows="8" cols="80" formControlName="long_description"></textarea>
+          </div>
+          <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+          <a class="btn btn-light" routerLink='/courses'>Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

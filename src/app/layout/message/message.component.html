@@ -1,0 +1,18 @@
+<div class="alert alert-success alert-dismissible fade show" *ngIf="messageService.message">
+  <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+  <strong>Success!</strong> {{ messageService.message }}
+</div>
+<div class="alert alert-danger alert-dismissible fade show" *ngIf="messageService.singleError">
+  <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+  <strong>Danger !</strong> {{ messageService.singleError }}
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" *ngIf="messageService.errors.length">
+  <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+  <div class="mb-2">
+    <strong>Danger!</strong> Something went wrong.
+  </div>
+  <ul>
+    <li *ngFor = 'let error of messageService.errors'>{{ error }}</li>
+  </ul>
+</div>
