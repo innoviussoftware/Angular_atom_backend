@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MaterialService } from '../material.service';
 import { CourseService } from '../course.service';
@@ -15,6 +15,7 @@ export class MaterialComponent implements OnInit {
   material_upload = new FormData();
   course: Course;
   materials: Material[];
+
   @ViewChild('material_input') materialInput: ElementRef;
 
 
@@ -31,7 +32,10 @@ export class MaterialComponent implements OnInit {
 
   ngOnInit() {
     this.courseService.getCourse(this.id)
-      .subscribe(course => this.materials = course.materials);
+      .subscribe(course => {
+        this.materials = course.materials;
+        this.course = course;
+      });
   }
 
   onSubmit() {
@@ -43,10 +47,6 @@ export class MaterialComponent implements OnInit {
       });
       this.material_upload.delete('file[]');
       this.materialInput.nativeElement.value = '';
-
-    // this.courseService.getCourse(this.id)
-    //     .subscribe(course => this.materials = course.materials);
-        // document.getElementById('material_form').reset();
   }
 
   onFileChange(event) {
@@ -56,7 +56,6 @@ export class MaterialComponent implements OnInit {
       for (var i = 0; i < files.length; i++) {
         this.material_upload.append("file[]", files[i]);
       }
-      // this.material_upload.append('file', files);
     }
   }
 

@@ -10764,14 +10764,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #b66dff;
-  border-color: #b66dff;
+  background-color: #3578ad;
+  border-color: #3578ad;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #a347ff;
-  border-color: #9d3aff;
+  background-color: #2b618c;
+  border-color: #2b618c;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -14265,7 +14265,7 @@ button.close {
 }
 
 .bg-primary {
-  background-color: #b66dff !important;
+  background-color: #3578ad !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -16864,7 +16864,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #b66dff !important;
+  color: #3578ad !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
@@ -17281,7 +17281,7 @@ input:focus {
 
 /* Backgrounds  */
 .bg-gradient-primary {
-  background: linear-gradient(to right, #da8cff, #9a55ff);
+  background: linear-gradient(to right, #92cfff, #3578ad);
 }
 
 .bg-gradient-secondary {
@@ -17430,12 +17430,12 @@ input:focus {
 }
 
 .sidebar .nav .nav-item.active > .nav-link .menu-title {
-  color: #b66dff;
+  color: #3578ad;
   font-family: "ubuntu-medium", sans-serif;
 }
 
 .sidebar .nav .nav-item.active > .nav-link i {
-  color: #b66dff;
+  color: #3578ad;
 }
 
 .sidebar .nav .nav-item:hover {
@@ -18844,12 +18844,12 @@ code {
 }
 
 .purchase-popup .btn.purchase-button {
-  background-color: rgba(172, 50, 228, 0.9);
-  background-image: -owg-linear-gradient(to right, #da8cff, #9a55ff);
-  background-image: -webkit-linear-gradient(to right, #da8cff, #9a55ff);
-  background-image: -moz-linear-gradient(to right, #da8cff, #9a55ff);
-  background-image: -o-linear-gradient(to right, #da8cff, #9a55ff);
-  background-image: linear-gradient(to right, #da8cff, #9a55ff);
+  background-color: #3578ad;
+  background-image: -owg-linear-gradient(to right, #92cfff, #3578ad);
+  background-image: -webkit-linear-gradient(to right, #92cfff, #3578ad);
+  background-image: -moz-linear-gradient(to right, #92cfff, #3578ad);
+  background-image: -o-linear-gradient(to right, #92cfff, #3578ad);
+  background-image: linear-gradient(to right, #92cfff, #3578ad);
   color: #ffffff;
   border: none;
   line-height: 1;
@@ -19819,7 +19819,7 @@ code {
 
 /* gradient buttons */
 .btn-gradient-primary {
-  background: linear-gradient(to right, #da8cff, #9a55ff);
+  background: linear-gradient(to right, #92cfff, #3578ad);
   border: 0;
   -webkit-transition: opacity 0.3s ease;
   -moz-transition: opacity 0.3s ease;
@@ -19830,7 +19830,7 @@ code {
 
 .btn-gradient-primary:not([disabled]):not(.disabled):active, .btn-gradient-primary:not([disabled]):not(.disabled).active,
 .show > .btn-gradient-primary.dropdown-toggle {
-  background: linear-gradient(to right, #da8cff, #9a55ff);
+  background: linear-gradient(to right, #92cfff, #3578ad);
 }
 
 .btn-gradient-primary:hover {
@@ -20274,7 +20274,7 @@ code {
   content: "";
   top: 0;
   left: 0;
-  border: solid #b66dff;
+  border: solid #3578ad;
   border-width: 2px;
   width: 20px;
   height: 20px;
@@ -20323,7 +20323,7 @@ code {
 }
 
 .form-check .form-check-label input[type="radio"]:checked + .input-helper:before {
-  background: linear-gradient(to right, #da8cff, #9a55ff);
+  background: linear-gradient(to right, #92cfff, #3578ad);
   border-width: 0;
 }
 
@@ -20941,4 +20941,11 @@ dl li {
   color: initial;
 }
 
+/*# sourceMappingURL=maps/style.css.map */
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+  background-color: #3578ad;
+}
+a, a:hover{
+  color: #3578ad;
+}
 /*# sourceMappingURL=maps/style.css.map */

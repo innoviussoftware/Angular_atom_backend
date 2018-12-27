@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
+// import * as $ from 'jquery';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +34,7 @@ import { CheckAuth } from './auth/check-auth.guard';
     CategoryModule,
     AuthModule,
   ],
-  providers: [CheckAuth],
+  providers: [CheckAuth,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

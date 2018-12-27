@@ -65,6 +65,7 @@ export class MaterialService {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
+      window.scrollTo(0, 0);
       if (error.status == 422) {
         this.messageService.showErrors(error.error);
       } else {

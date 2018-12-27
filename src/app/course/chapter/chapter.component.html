@@ -1,0 +1,182 @@
+<div class="page-header">
+  <h3 class="page-title">
+    Edit Course
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+      <li class="breadcrumb-item"><a routerLink="/courses">Courses</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add New</li>
+    </ol>
+  </nav>
+</div>
+
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+  <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#"  href="javascript:void(0);" routerLink="/courses/edit/{{ id }}/details">General <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" href="javascript:void(0);" routerLink="/courses/edit/{{ id }}/chapters">Syllabus</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<div class="card mb-5" *ngFor="let chapter of chapters; let i = index;">
+  <div class="card-header bg-white">
+    <form method="post" class="title_form">
+      <div class="input-group">
+        <input type="text" class="form-control" value="{{ chapter.title }}" (blur)="updateTitle($event,chapter )">
+        <div class="input-group-append">
+          <button class="btn btn-danger px-3" type="button" (click)="onClickdelete(chapter)"><i class="mdi mdi-delete-forever"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-body py-3">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-secondary" *ngFor="let content of chapter.chapter_contents">
+        {{ content.type | uppercase }} : <b class="text-dark">{{ content.title }}</b>
+        <button *ngIf="content.type == 'html';else elseBlock" type="button" class="btn btn-inverse-info btn-rounded btn-icon float-right" (click)="openEditChapterContentModal(content)">
+          <i class="mdi mdi-table-edit"></i>
+        </button>
+        <ng-template #elseBlock>
+          <button  type="button" class="btn btn-inverse-info btn-rounded btn-icon float-right" (click)="openVideoModal(chapter,content)">
+            <i class="mdi mdi-table-edit"></i>
+          </button>
+        </ng-template>
+
+        <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon float-right" (click)="deleteChapterContent(content, i);">
+          <i class="mdi mdi-delete-forever"></i>
+        </button>
+      </li>
+    </ul>
+    <br>
+
+    <div class="text-center">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Add learning Object
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="javascript:void(0);" (click)="openChapterContentModal(chapter.id)" >Content</a>
+          <a class="dropdown-item" href="javascript:void(0);" (click)="openVideoModal(chapter.id)">Video</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="btn btn-block btn-secondary" id="add_chapter_btn" (click)="onClickAddChapter()">Add Chapter +</button>
+
+<script src="../../js/file-upload.js"></script>
+
+
+<!-- Modal Section -->
+<div class="modal fade" id="addChapterContentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form class="forms-sample" [formGroup]="addChapterContentForm" (ngSubmit)="onSubmitAddContentForm();" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title">Add HTML Content</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Title</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="title" />
+              </div>
+              <div class="form-group">
+                <label>Content</label><span class="text-danger">*</span>
+                <ck-editor formControlName="content" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="add_chapter_content_btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Section -->
+<div class="modal fade" id="editChapterContentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form class="forms-sample" [formGroup]="editChapterContentForm" (ngSubmit)="onSubmitEditContentForm();" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title">Add HTML Content</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Title</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="title" />
+              </div>
+              <div class="form-group">
+                <label>Content</label><span class="text-danger">*</span>
+                <ck-editor formControlName="content" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="add_chapter_content_btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Video Modal -->
+<div class="modal fade" id="video_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form class="forms-sample" [formGroup]="contentVideoForm" (ngSubmit)="submitVideoContent();" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Video Content</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+
+              <div class="form-group">
+                <label>Title</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="title" />
+              </div>
+              <div class="form-group">
+                <label>Url</label><span class="text-danger">*</span>
+                <input type="url" class="form-control" formControlName="content" />
+                <small class="text-danger">Please enter a valid video URL of youtube or vimeo.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="add_chapter_content_btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

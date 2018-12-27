@@ -1,0 +1,190 @@
+<div class="page-header">
+  <h3 class="page-title">
+
+    <a href="javascript:void(0);" routerLink="/courses/edit/{{ id }}"> <i class="mdi mdi-chevron-left text-primary"></i></a>
+    Manage modules
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+      <li class="breadcrumb-item"><a routerLink="/courses">Courses</a></li>
+      <li class="breadcrumb-item"><a routerLink="/courses/edit/{{ id }}">{{ course.name }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Modules</li>
+    </ol>
+  </nav>
+</div>
+<div class="row">
+  <div class="col grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form class="forms-sample" [formGroup]="addForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Title</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="title">
+              </div>
+              <div class="form-group">
+                <label>Description</label><span class="text-danger">*</span>
+                <textarea class="form-control" formControlName="description"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Choose File</label><span class="text-danger">*</span>
+                <input type="file" name="file[]" multiple formControlName="file" class="form-control file-upload-info" (change)="onFileChange($event)">
+              </div>
+            </div>
+            <div class="col-12">
+              <h4>Add sections <button type="button" class="btn btn-gradient-success btn-sm" (click)="addSection()" ><i class="mdi mdi-plus"></i></button></h4>
+              <div class="row px-5">
+                <div class="col-12 my-3 py-3 bg-secondary " formArrayName="sections" *ngFor="let item of addForm.get('sections').value; let i = index;">
+                  <div [formGroupName]="i">
+                    <input class="form-control" formControlName="title" placeholder="Section title">
+                    <br>
+                    <textarea rows="5" class="form-control" formControlName="description" placeholder="Section description"></textarea>
+                  </div>
+                  <!-- Chosen name: {{ addForm.controls.sections.controls[i].controls.title.value }} -->
+                </div>
+                <!-- <div class="col bg-grey">
+                  <div class="form-group">
+                    <label>Title</label><span class="text-danger">*</span>
+                    <input type="text" class="form-control" formControlName="title">
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label><span class="text-danger">*</span>
+                    <textarea class="form-control" formControlName="description"></textarea>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <button type="submit" id="add_module_btn" class="btn btn-gradient-primary mr-2">Add new module</button>
+          <a class="btn btn-light" routerLink='/courses/edit/{{ id }}'>Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="accordion">
+          <div class="card" *ngFor="let module of cmodules">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" attr.data-target='#collapse{{ module.id }}'>
+                  {{ module.title }}
+                </button>
+                <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon float-right" (click)="delete(module)">
+                  <i class="mdi mdi-delete-forever"></i>
+                </button>
+                <button type="button" class="btn btn-inverse-info btn-rounded btn-icon float-right" (click)="openModal(module)">
+                  <i class="mdi mdi-table-edit"></i>
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapse{{ module.id }}" class="collapse" data-parent="#accordionExample">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <h5>Description:</h5>
+                    <p>{{ module.description }}</p>
+                    <h5>Sections:</h5>
+                    <ul class="list-group">
+                      <li *ngFor="let section of module.sections" class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ section.title }}
+                        <span class="badge badge-primary badge-pill" (click)="openModalSection(section);"><i class="mdi mdi-table-edit"></i></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editModuleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form class="forms-sample" [formGroup]="editForm" (ngSubmit)="onUpdateModule()" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Title</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="title">
+              </div>
+              <div class="form-group">
+                <label>Description</label><span class="text-danger">*</span>
+                <textarea class="form-control" formControlName="description"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Choose File</label><span class="text-danger">*</span>
+                <input type="file" name="file[]" multiple formControlName="file" class="form-control file-upload-info" (change)="onFileChange($event)">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-wrap" *ngIf="module_files">
+            <div class="text-center p-3" *ngFor="let file of module_files; let i = index;">
+              <h1 class="display-1"><i class="mdi mdi-file-document text-info"></i></h1>
+              <a href='{{ file.file }}' target="_blank"><i class="mdi mdi-eye text-primary"></i></a>
+              <a href="javascript:void(0);" class="text-danger" (click)="deleteFile(file)"><i class="mdi mdi-delete-forever text-danger"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="submit_module_btn">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal Section -->
+<div class="modal fade" id="editSectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form class="forms-sample" [formGroup]="editSectionForm" (ngSubmit)="updateSection();" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Section</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Title</label><span class="text-danger">*</span>
+                <input type="hidden" class="form-control" formControlName="id">
+                <input type="text" class="form-control" formControlName="title">
+              </div>
+              <div class="form-group">
+                <label>Description</label><span class="text-danger">*</span>
+                <textarea rows="5" class="form-control" formControlName="description"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="submit_section_btn">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

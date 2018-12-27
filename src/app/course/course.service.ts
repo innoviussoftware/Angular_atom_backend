@@ -58,6 +58,9 @@ export class CourseService {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
+      window.scrollTo(0, 0);
+      // document.body.scrollTop = 0; // For Safari
+      // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       if (error.status == 422) {
         this.messageService.showErrors(error.error);
       } else {

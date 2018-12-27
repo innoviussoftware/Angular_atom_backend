@@ -17,13 +17,14 @@
           <img src="{{ course.image }}"  *ngIf="course.image" class="img-fluid"/>
           <h2 class="section-title">{{course.name}}</h2>
           <div class="text-muted mb-2">
-            <i class="mdi mdi-account-circle text-primary"></i> {{ course.user.name }}
+            <i class="mdi mdi-account-circle text-primary"></i> User name
             <small><i class="mdi mdi-checkbox-blank-circle text-muted"></i></small>&nbsp;
             <i class="mdi mdi-clock text-primary"></i> {{ course.duration }} Months
             </div>
 
           <h4>Description</h4>
-          <p class="text-muted">{{course.long_description}}</p>
+          <div [innerHTML]="course.long_description" ></div>
+          <!-- <p class="text-muted">{{}}</p> -->
         </div>
       </div>
     </div>

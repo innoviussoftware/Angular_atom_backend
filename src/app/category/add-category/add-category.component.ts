@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { Category } from '../category';
 import { CategoryService } from '../category.service';
+declare var $: any;
+
 
 @Component({
   selector: 'app-add-category',
@@ -14,6 +16,7 @@ export class AddCategoryComponent implements OnInit {
 
   addForm: FormGroup;
   category: Category;
+  isDisabled = false;
 
   constructor(private formBuilder: FormBuilder, private categoryService: CategoryService) { }
 
@@ -25,8 +28,9 @@ export class AddCategoryComponent implements OnInit {
   }
 
   onSubmit() {
+    $('#submit_btn').prop('disabled', true);
     this.categoryService.storeCategory(this.addForm.value)
-    .subscribe(category => this.category = category);
+    .subscribe(category => this.category = category, error => {}, () => $('#submit_btn').prop('disabled', false));
 
 
     // this.apiService.updateUser(this.editForm.value)

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DashboardService } from './dashboard.service'
+import { Course } from '../course/course';
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  courses:Course[];
+  course_count:number = 0;
+
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
+    this.dashboardService.getDashboard()
+      .subscribe(dashboard => {
+        this.courses = dashboard.courses;
+        this.course_count = dashboard.course_count;
+        // console.log(this.dashboard);
+      });
   }
 
 }

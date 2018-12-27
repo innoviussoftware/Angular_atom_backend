@@ -48,9 +48,28 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="exampleInputEmail3">Long Description</label>
             <textarea class="form-control" rows="8" cols="80" formControlName="long_description"></textarea>
+          </div> -->
+          <div class="form-group">
+            <label for="exampleInputEmail3">Overview</label>
+            <ck-editor formControlName="long_description" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" formControlName="status" value="1">
+                Active
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" formControlName="status" value="0">
+                Inactive
+              </label>
+            </div>
           </div>
           <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
           <a class="btn btn-light" routerLink='/categories'>Cancel</a>

@@ -11,6 +11,9 @@
       <div class="content-wrapper">
         <app-message></app-message>
         <router-outlet></router-outlet>
+        <div class="loading-overlay text-center" #spinnerElement style="opacity: 0;">
+          <h2 class="text-primary">Loading...</h2>
+        </div>
       </div>
       <!-- content-wrapper ends -->
       <app-footer></app-footer>

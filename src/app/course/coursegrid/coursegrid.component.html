@@ -1,60 +1,65 @@
-  <div class="page-header">
-    <h3 class="page-title">
-      Courses
-    </h3>
-    <a routerLink="/courses/add" class="btn btn-inverse-success">
-      Add Courses <i class="mdi mdi-plus-circle"></i>
-    </a>
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Courses</li>
-      </ol>
-    </nav>
-  </div>
+<div class="page-header">
+  <h3 class="page-title">
+    Courses
+  </h3>
+  <a routerLink="/courses/add" class="btn btn-inverse-success">
+    Add Courses <i class="mdi mdi-plus-circle"></i>
+  </a>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Courses</li>
+    </ol>
+  </nav>
+</div>
 
-  <div class="row">
-    <div class="col-lg-12 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Author</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Duration</th>
-                <th>Action</th>
-                <!-- <th>Progress</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let course of courses">
-                <td>{{ course.id }}</td>
-                <td class="py-1">
-                  <img src="assets/images/faces-clipart/pic-1.png" alt="image">
-                </td>
-                <td>{{ course.name }}</td>
-                <td>AED {{ course.price }}</td>
-                <td>{{ course.duration }} Months</td>
-                <td>
-                  <button  routerLink='/courses/{{ course.id }}' type="button" class="btn btn-inverse-primary btn-rounded btn-icon" >
-                          <i class="mdi mdi mdi-eye"></i>
-                        </button>
-                  <button routerLink='/courses/edit/{{ course.id }}' type="button" class="btn btn-inverse-info btn-rounded btn-icon">
-                          <i class="mdi mdi-table-edit"></i>
-                        </button>
-                </td>
-                <!-- <td>
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Author</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Duration</th>
+              <th>Status</th>
+              <th>Action</th>
+              <!-- <th>Progress</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of courses">
+              <td>{{ course.id }}</td>
+              <td class="py-1">
+                <img src="assets/images/faces-clipart/pic-1.png" alt="image">
+              </td>
+              <td>{{ course.name }}</td>
+              <td>AED {{ course.price }}</td>
+              <td>{{ course.duration }} Months</td>
+              <td>
+                <label class='badge badge-success' *ngIf="course.status == '1'">Active</label>
+                <label class='badge badge-danger' *ngIf="course.status == '0'">Inactive</label>
+              </td>
+              <td>
+                <button routerLink='/courses/{{ course.id }}' type="button" class="btn btn-inverse-primary btn-rounded btn-icon">
+                  <i class="mdi mdi mdi-eye"></i>
+                </button>
+                <button routerLink='/courses/edit/{{ course.id }}/details' type="button" class="btn btn-inverse-info btn-rounded btn-icon">
+                  <i class="mdi mdi-table-edit"></i>
+                </button>
+              </td>
+              <!-- <td>
                   <div class="progress">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                 </td> -->
-              </tr>
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>

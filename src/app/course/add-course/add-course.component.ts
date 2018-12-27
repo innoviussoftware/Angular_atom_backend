@@ -4,8 +4,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { CourseService } from '../course.service'
 import { CategoryService } from '../../category/category.service';
-import { Course } from '../course'
+import { Course } from '../course';
 
+declare var $: any;
 
 @Component({
   selector: 'app-course',
@@ -27,6 +28,8 @@ export class AddCourseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //checkbox and radios
+    $(".form-check label,.form-radio label").append('<i class="input-helper"></i>');
     this.categoryService.getCategories()
       .subscribe(categories => this.categories = categories);
 
@@ -38,6 +41,7 @@ export class AddCourseComponent implements OnInit {
       long_description: ['', Validators.required],
       short_description: ['', Validators.required],
       image: [null, Validators.required],
+      status: ['0', Validators.required],
     });
   }
 
@@ -45,7 +49,8 @@ export class AddCourseComponent implements OnInit {
     const formModel = this.prepareSave();
     this.courseService.storeCourse(formModel)
       .subscribe(course => {
-        this.router.navigate(['/courses/edit/'+course.id]);
+        this.router.navigate(['/courses/edit/'+course.id+'/details']);
+        // window.scrollTo(0, 0);
       });
   }
 
@@ -65,6 +70,7 @@ export class AddCourseComponent implements OnInit {
     input.append('duration', this.addForm.get('duration').value);
     input.append('long_description', this.addForm.get('long_description').value);
     input.append('short_description', this.addForm.get('short_description').value);
+    input.append('status', this.addForm.get('status').value);
     input.append('image', this.addForm.get('image').value);
     return input;
   }

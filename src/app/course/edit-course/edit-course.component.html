@@ -1,8 +1,7 @@
 <div class="page-header">
   <h3 class="page-title">
-    Add New Course
+    Edit Course
   </h3>
-  <button type="button" class="btn btn-inverse-success btn-fw btn-sm" routerLink="/courses/edit/{{ id }}/materials">Manage Materials</button>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
@@ -11,6 +10,24 @@
     </ol>
   </nav>
 </div>
+
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+  <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#"  href="javascript:void(0);" routerLink="/courses/edit/{{ id }}/details">General <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" href="javascript:void(0);" routerLink="/courses/edit/{{ id }}/chapters">Syllabus</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
 <div class="row">
   <div class="col grid-margin stretch-card">
     <div class="card">
@@ -32,13 +49,13 @@
               </div>
               <div class="form-group">
                 <label>Image</label>
-                <input type="file" class="form-control"  (change)="onFileChange($event)"  name="image">
+                <input type="file" class="form-control" (change)="onFileChange($event)" name="image">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label>Price(AED)</label><span class="text-danger">*</span>
-                <input type="text" class="form-control" formControlName="price" name="price" >
+                <input type="text" class="form-control" formControlName="price" name="price">
               </div>
               <div class="form-group">
                 <label>Duration (In Months)</label><span class="text-danger">*</span>
@@ -46,14 +63,34 @@
               </div>
               <div class="form-group">
                 <label>Short Description</label>
-                <input type="text" class="form-control" formControlName="short_description" name="short_description">
+                <!-- <input type="text" class="form-control" formControlName="short_description" name="short_description"> -->
+                <textarea rows="5" class="form-control" formControlName="short_description"></textarea>
               </div>
             </div>
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="exampleInputEmail3">Long Description</label>
             <textarea class="form-control" rows="8" cols="80" formControlName="long_description"></textarea>
+          </div> -->
+          <div class="form-group">
+            <label for="exampleInputEmail3">Overview</label>
+            <ck-editor formControlName="long_description" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" formControlName="status" value="1">
+                Active
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" formControlName="status" value="0">
+                Inactive
+              </label>
+            </div>
           </div>
           <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
           <a class="btn btn-light" routerLink='/courses'>Cancel</a>
@@ -62,3 +99,5 @@
     </div>
   </div>
 </div>
+
+<script src="../../js/file-upload.js"></script>

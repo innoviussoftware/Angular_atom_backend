@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CourseService } from '../course.service'
 import { CategoryService } from '../../category/category.service';
 import { Course } from '../course'
+declare var $: any;
 
 
 @Component({
@@ -28,6 +29,9 @@ export class EditCourseComponent implements OnInit {
   }
 
   ngOnInit() {
+    //checkbox and radios
+    $(".form-check label,.form-radio label").append('<i class="input-helper"></i>');
+
     this.editForm = this.formBuilder.group({
       id: ['', Validators.required],
       user_id: ['', Validators.required],
@@ -39,7 +43,7 @@ export class EditCourseComponent implements OnInit {
       long_description: ['', Validators.required],
       short_description: ['', Validators.required],
       image: [null, Validators.required],
-      status: [true, Validators.required],
+      status: ['0', Validators.required],
     });
 
 
@@ -51,8 +55,10 @@ export class EditCourseComponent implements OnInit {
         delete course.user;
         delete course.category;
         delete course.materials;
+        delete course.modules;
         delete course.updated_at;
         delete course.created_at;
+        course.status = String(course.status);
         this.editForm.setValue(course);
       });
 

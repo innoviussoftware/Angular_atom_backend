@@ -24,7 +24,7 @@
               <label for="exampleInputEmail3">Description</label>
               <textarea class="form-control" rows="8" cols="80" formControlName="description" ></textarea>
             </div>
-            <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+            <button type="submit" id="submit_btn" class="btn btn-gradient-primary mr-2" [disabled]="isDisabled">Submit</button>
             <a class="btn btn-light" routerLink='/categories'>Cancel</a>
           </form>
         </div>
