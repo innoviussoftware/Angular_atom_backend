@@ -108,9 +108,9 @@ export class ChapterComponent implements OnInit {
     $('#addChapterContentModal').modal('show');
   }
 
-  openVideoModal(chapter_id:number, content: ChapterContent) {
+  openVideoModal(chapter_id: number, content: ChapterContent) {
     this.contentVideoForm.controls['id'].setValue(content ? content.id : 0);
-    this.contentVideoForm.controls['title'].setValue(content ? content.title : 0);
+    this.contentVideoForm.controls['title'].setValue(content ? content.title : '');
     this.contentVideoForm.controls['chapter_id'].setValue(chapter_id);
     this.contentVideoForm.controls['type'].setValue('video');
     this.contentVideoForm.controls['priority'].setValue(content ? content.priority : 0);
@@ -169,12 +169,15 @@ export class ChapterComponent implements OnInit {
         this.chapters.map((ch, i) => {
           if (ch.id == chapter_content.chapter_id) {
             ch.chapter_contents.push(chapter_content);
-            $('#addChapterContentModal').modal('hide');
-            $("#add_chapter_content_btn").prop('disabled', false);
-            $("#add_chapter_content_btn").text('Submit');
           }
         });
-      });
+      })
+      .add(() => {
+        // Do some work after complete...
+        $('#addChapterContentModal').modal('hide');
+        $("#add_chapter_content_btn").prop('disabled', false);
+        $("#add_chapter_content_btn").text('Submit');
+    });
   }
 
   onSubmitEditContentForm() {
@@ -190,11 +193,13 @@ export class ChapterComponent implements OnInit {
               }
             });
 
-            $('#editChapterContentModal').modal('hide');
-            $("#edit_chapter_content_btn").prop('disabled', false);
-            $("#edit_chapter_content_btn").text('Submit');
           }
         });
+      })
+      .add(()=>{
+        $('#editChapterContentModal').modal('hide');
+        $("#edit_chapter_content_btn").prop('disabled', false);
+        $("#edit_chapter_content_btn").text('Submit');
       });
   }
 

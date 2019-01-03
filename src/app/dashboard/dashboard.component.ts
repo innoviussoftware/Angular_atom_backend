@@ -12,6 +12,7 @@ import { Course } from '../course/course';
 export class DashboardComponent implements OnInit {
 
   courses:Course[];
+  users:any[];
   course_count:number = 0;
 
   constructor(private dashboardService: DashboardService) { }
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(dashboard => {
         this.courses = dashboard.courses;
         this.course_count = dashboard.course_count;
+        this.users = dashboard.users;
         // console.log(this.dashboard);
       });
   }

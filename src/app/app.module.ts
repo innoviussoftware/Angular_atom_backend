@@ -14,7 +14,7 @@ import { CourseModule } from './course/course.module';
 import { CategoryModule } from './category/category.module';
 import { AuthModule } from './auth/auth.module';
 import { LayoutModule } from './layout/layout.module';
-
+import { UserModule } from './user/user.module';
 import { CheckAuth } from './auth/check-auth.guard';
 
 
@@ -33,6 +33,7 @@ import { CheckAuth } from './auth/check-auth.guard';
     CourseModule,
     CategoryModule,
     AuthModule,
+    UserModule
   ],
   providers: [CheckAuth,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

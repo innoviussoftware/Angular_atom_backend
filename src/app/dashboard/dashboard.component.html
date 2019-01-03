@@ -28,7 +28,7 @@
   <div class="row">
     <div class="col-md-4 stretch-card grid-margin">
       <div class="card bg-gradient-danger card-img-holder text-white">
-        <div class="card-body">
+        <div class="card-body py-1">
           <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
           <h4 class="font-weight-normal mb-3">Total Active Courses
             <i class="mdi mdi-chart-line mdi-24px float-right"></i>
@@ -214,38 +214,39 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>
+                  <!-- <th>
                     #
-                  </th>
+                  </th> -->
                   <th>
                     Name
                   </th>
                   <th>
-                    Due Date
+                    Email
                   </th>
                   <th>
-                    Progress
+                    Due Date
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngFor="let user of users;">
+                  <!-- <td>
+                    {{ user.id }}
+                  </td> -->
                   <td>
-                    1
+                    {{ user.name }}
                   </td>
                   <td>
-                    Herman Beck
+                    {{ user.email }}
                   </td>
                   <td>
-                    May 15, 2015
-                  </td>
-                  <td>
-                    <div class="progress">
+                    {{ user.created_at | date }}
+                    <!-- <div class="progress">
                       <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                    </div> -->
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td>
                     2
                   </td>
@@ -324,7 +325,7 @@
                       <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>

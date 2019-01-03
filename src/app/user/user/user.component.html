@@ -1,0 +1,33 @@
+<div class="page-header">
+  <h3 class="page-title">
+    User Details
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+      <li class="breadcrumb-item"><a routerLink="/users">Users</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Single User</li>
+    </ol>
+  </nav>
+</div>
+<div class="row">
+  <div class="col grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="section-title">{{user.name}}</h2>
+        <div class="text-muted mb-2">
+          <i class="mdi mdi-email text-primary"></i> {{ user.email }}
+        </div>
+        <br>
+        <br>
+        <h4>Enrolled courses</h4>
+        <ul class="list-group" *ngIf="user.courses.length > 0; else elsepart">
+          <a href="#" routerLink="/courses/{{ course.id }}" *ngFor="let course of user.courses" class="list-group-item list-group-item-action">{{ course.name }}</a>
+        </ul>
+        <ng-template #elsepart>
+          <p class="text-muted">User has no any course enrolled yet.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,13 +24,18 @@ export class AuthService {
   }
 
   login(data): Observable<any> {
-    return this.http.post<any>(AppConfig.API_ENDPOINT + 'login', data)
+    return this.http.post<any>(AppConfig.API_ENDPOINT + 'login_admin', data)
       .pipe(
         tap(_ => console.log('login successfull')),
         // catchError(this.handleError<any>('login',err: HttpResponse))
         catchError(error => this.handleError(error))
 
       );
+  }
+
+  logout(){
+    localStorage.removeItem("auth_token");
+    location.reload();
   }
   //
   //
