@@ -22,20 +22,22 @@
           <thead>
             <tr>
               <th>Id</th>
-              <th>Name</th>
+              <th>Full Name</th>
               <th>Role</th>
               <th>Email</th>
+              <th>Contact No.</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let user of users">
               <td>{{ user.id }}</td>
-              <td>{{ user.name }}</td>
+              <td>{{ user.name+' '+user.last_name }}</td>
               <td>
                 <span *ngFor="let role of user.roles">{{ role.display_name }}</span>
               </td>
               <td>{{ user.email }}</td>
+              <td>{{ user.contact_number }}</td>
               <td>
                 <button type="button" class="btn btn-inverse-info btn-rounded btn-icon" routerLink="/users/{{ user.id }}">
                   <i class="mdi mdi-eye"></i>
