@@ -48,6 +48,13 @@ export class ChapterService {
       )
   }
 
+  file_upload(fileToUpload): Observable<any> {
+    return this.http.post<any>(AppConfig.API_ENDPOINT + 'chapters/image/upload', fileToUpload)
+      .pipe(
+        catchError(this.handleError<any>('File uploaded'))
+      )
+  }
+
   update(chapter: Chapter, id): Observable<Chapter>{
     return this.http.put<Chapter>(AppConfig.API_ENDPOINT + 'chapters/' + id, chapter)
     .pipe(

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
@@ -22,7 +22,10 @@ export class ChapterComponent implements OnInit {
   // chapter_content: ChapterContent;
   addChapterContentForm: FormGroup;
   contentVideoForm: FormGroup;
+  contentImageForm: FormGroup;
   editChapterContentForm: FormGroup;
+  image_upload = new FormData();
+  @ViewChild("fileInput") fileInput;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,6 +57,15 @@ export class ChapterComponent implements OnInit {
     });
 
     this.contentVideoForm = this.formBuilder.group({
+      id: ['', Validators.required],
+      title: ['', Validators.required],
+      type: ['', Validators.required],
+      chapter_id: ['', Validators.required],
+      content: ['', Validators.required],
+      priority: ['', Validators.required],
+    });
+
+    this.contentImageForm = this.formBuilder.group({
       id: ['', Validators.required],
       title: ['', Validators.required],
       type: ['', Validators.required],
@@ -118,6 +130,17 @@ export class ChapterComponent implements OnInit {
     $('#video_modal').modal('show');
   }
 
+  openImageModal(chapter_id: number, content: ChapterContent) {
+    this.contentImageForm.controls['id'].setValue(content ? content.id : 0);
+    this.contentImageForm.controls['title'].setValue(content ? content.title : '');
+    this.contentImageForm.controls['chapter_id'].setValue(chapter_id);
+    this.contentImageForm.controls['type'].setValue('image');
+    this.contentImageForm.controls['priority'].setValue(content ? content.priority : 0);
+    this.contentImageForm.controls['content'].setValue(content ? content.content : '');
+    this.image_upload.delete('image');
+    $('#image_modal').modal('show');
+  }
+
   submitVideoContent() {
     $("#submit_video_button").prop('disabled', true);
     $("#submit_video_button").text('Wait');
@@ -149,6 +172,37 @@ export class ChapterComponent implements OnInit {
             }
           });
         });
+    }
+  }
+
+  submitImageContent() {
+    let fi = this.fileInput.nativeElement;
+    if (fi.files && fi.files[0]) {
+      $("#submit_image_button").prop('disabled', true);
+      $("#submit_image_button").text('Wait');
+        let fileToUpload = fi.files[0];
+        let input = new FormData();
+        input.append("image", fileToUpload);
+        this.chapterService.file_upload(input)
+        .subscribe(file_upload => {
+
+          this.contentImageForm.controls['content'].setValue(file_upload.path);
+          this.chapterService.storeContent(this.contentImageForm.value)
+            .subscribe(chapter_content => {
+              this.chapters.map((ch, i) => {
+                if (ch.id == chapter_content.chapter_id) {
+                  ch.chapter_contents.push(chapter_content);
+                }
+              });
+            })
+            .add(() => {
+              $('#image_modal').modal('hide');
+              $("#submit_image_button").prop('disabled', false);
+              $("#submit_image_button").text('Submit');
+            });
+        });
+    }else{
+      alert("Please select an image to upload.");
     }
   }
 
@@ -207,6 +261,16 @@ export class ChapterComponent implements OnInit {
     if (confirm('Are you sure you want to delete this content?')) {
       this.chapters[index].chapter_contents = this.chapters[index].chapter_contents.filter(c => c !== content);
       this.chapterService.deleteContent(content.id).subscribe();
+    }
+  }
+
+  onFileChange(event) {
+    this.image_upload.delete('image');
+    if (event.target.files.length > 0) {
+      let files = event.target.files;
+      for (var i = 0; i < files.length; i++) {
+        this.image_upload.append("image", files[i]);
+      }
     }
   }
 }
