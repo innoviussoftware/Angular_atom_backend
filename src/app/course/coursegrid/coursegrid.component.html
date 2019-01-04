@@ -38,7 +38,7 @@
               </td>
               <td>{{ course.name }}</td>
               <td>AED {{ course.price }}</td>
-              <td>{{ course.duration }} Months</td>
+              <td>{{ course.duration + ' ' + course.duration_units }}</td>
               <td>
                 <label class='badge badge-success' *ngIf="course.status == '1'">Active</label>
                 <label class='badge badge-danger' *ngIf="course.status == '0'">Inactive</label>

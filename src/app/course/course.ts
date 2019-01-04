@@ -11,6 +11,7 @@ export class Course {
   long_description:string;
   category_id:number;
   duration:number;
+  duration_units:string;
   language:string;
   image: string;
   status: string;

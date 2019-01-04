@@ -58,8 +58,17 @@
                 <input type="text" class="form-control" formControlName="price" name="price">
               </div>
               <div class="form-group">
-                <label>Duration (In Months)</label><span class="text-danger">*</span>
-                <input type="text" class="form-control" formControlName="duration" name="duration">
+                <label>Duration</label><span class="text-danger">*</span>
+                <div class="input-group mb-3">
+                  <input type="number" [min]="0" [step]="0.5" class="form-control" formControlName="duration" >
+                  <div class="input-group-append">
+                    <select class="form-control input-addon-select" formControlName="duration_units">
+                      <option value="days">Days</option>
+                      <option value="months">Months</option>
+                      <option value="years">Years</option>
+                    </select>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label>Short Description</label>

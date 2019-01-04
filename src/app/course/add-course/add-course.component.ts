@@ -37,6 +37,7 @@ export class AddCourseComponent implements OnInit {
       category_id: ['', Validators.required],
       price: ['', Validators.required],
       duration: ['', Validators.required],
+      duration_units: ['', Validators.required],
       name: ['', Validators.required],
       long_description: ['', Validators.required],
       short_description: ['', Validators.required],
@@ -68,6 +69,7 @@ export class AddCourseComponent implements OnInit {
     input.append('category_id', this.addForm.get('category_id').value);
     input.append('price', this.addForm.get('price').value);
     input.append('duration', this.addForm.get('duration').value);
+    input.append('duration_units', this.addForm.get('duration_units').value);
     input.append('long_description', this.addForm.get('long_description').value);
     input.append('short_description', this.addForm.get('short_description').value);
     input.append('status', this.addForm.get('status').value);

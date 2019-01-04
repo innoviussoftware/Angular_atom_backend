@@ -40,6 +40,7 @@ export class EditCourseComponent implements OnInit {
       language: ['', Validators.required],
       price: ['', Validators.required],
       duration: ['', Validators.required],
+      duration_units: ['', Validators.required],
       long_description: ['', Validators.required],
       short_description: ['', Validators.required],
       image: [null, Validators.required],
