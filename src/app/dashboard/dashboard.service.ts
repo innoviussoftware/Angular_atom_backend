@@ -14,6 +14,11 @@ import { MessageService } from '../message.service';
 })
 export class DashboardService {
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Accept': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('auth_token') })
+  };
+
+
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router) { }
 
   // /** GET heroes from the server */
@@ -23,7 +28,7 @@ export class DashboardService {
   //
   //
   getDashboard(): Observable<any> {
-    return this.http.get<any>(AppConfig.API_ENDPOINT + 'dashboard')
+    return this.http.get<any>(AppConfig.API_ENDPOINT + 'dashboard', this.httpOptions)
       .pipe(
         tap(_ => console.log('fetched dashboard')),
         catchError(this.handleError<any>('getDashboard'))
@@ -87,6 +92,8 @@ export class DashboardService {
       console.error(error); // log to console instead
       if (error.status == 422) {
         this.messageService.showErrors(error.error);
+      } else if(error.status == 403){
+        this.router.navigate(['page-not-permitted'])
       } else {
         alert('Something went wrong');
       }

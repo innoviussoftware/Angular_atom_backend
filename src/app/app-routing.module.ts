@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
+import { PageNotPermittedComponent } from './layout/page-not-permitted/page-not-permitted.component';
 import { FormComponent } from './form/form.component';
 import { LayoutComponent } from './layout/layout.component';
 import { CheckAuth } from './auth/check-auth.guard';
@@ -20,6 +21,7 @@ const routes: Routes = [
     ]
   },
   { path: 'page-not-found', component: PageNotFoundComponent },
+  { path: 'page-not-permitted', component: PageNotPermittedComponent },
 ];
 
 @NgModule({
