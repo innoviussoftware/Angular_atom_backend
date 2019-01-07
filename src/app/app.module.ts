@@ -16,14 +16,13 @@ import { AuthModule } from './auth/auth.module';
 import { LayoutModule } from './layout/layout.module';
 import { UserModule } from './user/user.module';
 import { CheckAuth } from './auth/check-auth.guard';
-
-
+import { WebinarModule } from './webinar/webinar.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    FormComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +32,8 @@ import { CheckAuth } from './auth/check-auth.guard';
     CourseModule,
     CategoryModule,
     AuthModule,
-    UserModule
+    UserModule,
+    WebinarModule,
   ],
   providers: [CheckAuth,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

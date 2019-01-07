@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h3 class="page-title">
+    Webinars
+  </h3>
+  <a routerLink="/webinars/add" class="btn btn-inverse-success">
+    Add Webinar <i class="mdi mdi-plus-circle"></i>
+  </a>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Webinars</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+              <th>URL</th>
+              <th>Instructor</th>
+              <th>Date Time</th>
+              <!-- <th>Short Description</th> -->
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let webinar of webinars">
+              <td>{{ webinar.id }}</td>
+              <td>{{ webinar.title }}</td>
+              <td><a href="{{ webinar.url }}">{{ webinar.url }}</a></td>
+              <td>{{ webinar.user.name +' '+ webinar.user.last_name }}</td>
+              <td>{{ webinar.date_time }}</td>
+              <!-- <td>{{ webinar.short_description }}</td> -->
+              <td>
+                <button routerLink='/webinars/edit/{{ webinar.id }}/details' type="button" class="btn btn-inverse-info btn-rounded btn-icon">
+                  <i class="mdi mdi-table-edit"></i>
+                </button>
+                <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon"  (click)="delete(webinar)">
+                  <i class="mdi mdi-delete-forever"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
