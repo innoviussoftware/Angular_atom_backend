@@ -8,6 +8,7 @@ export class Webinar {
   date_time: string;
   short_description: string;
   long_description: string;
+  status: number;
   created_at: string;
   updated_at: string;
 }
