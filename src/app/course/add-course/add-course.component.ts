@@ -17,6 +17,7 @@ export class AddCourseComponent implements OnInit {
   course: Course;
   categories: any[];
   addForm: FormGroup;
+  auth_user = JSON.parse(localStorage.getItem("auth_user"));
 
 
   constructor(
@@ -65,6 +66,7 @@ export class AddCourseComponent implements OnInit {
   private prepareSave(): any {
     let input = new FormData();
     // This can be done a lot prettier; for example automatically assigning values by looping through `this.addForm.controls`, but we'll keep it as simple as possible here
+    input.append('user_id', this.auth_user.id);
     input.append('name', this.addForm.get('name').value);
     input.append('category_id', this.addForm.get('category_id').value);
     input.append('price', this.addForm.get('price').value);

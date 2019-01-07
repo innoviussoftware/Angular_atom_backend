@@ -15,7 +15,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router) { }
 
-  isLoggedIn(): boolean {
+  isLoggedIn(): boolean { //Check if token is there
     if (localStorage.getItem('auth_token')) {
       return true;
     } {
@@ -23,7 +23,7 @@ export class AuthService {
     }
   }
 
-  login(data): Observable<any> {
+  login(data): Observable<any> { //Login API admin
     return this.http.post<any>(AppConfig.API_ENDPOINT + 'login_admin', data)
       .pipe(
         tap(_ => console.log('login successfull')),
@@ -33,10 +33,11 @@ export class AuthService {
       );
   }
 
-  logout(){
-    localStorage.removeItem("auth_token");
-    location.reload();
-  }
+  logout(){ //Logout:: clear local storage and reload after it
+     localStorage.removeItem("auth_token"); //Remove token
+     localStorage.removeItem("auth_user"); //Remove user
+     location.reload();
+   }
   //
   //
   //  getCourse(id: number): Observable<Course> {

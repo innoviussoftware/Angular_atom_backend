@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  auth_user = JSON.parse(localStorage.getItem("auth_user"));
 
   constructor() { }
 

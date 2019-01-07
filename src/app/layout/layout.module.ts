@@ -8,6 +8,7 @@ import { TopbarComponent } from './topbar/topbar.component';
 import { MessageComponent } from './message/message.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LayoutComponent } from './layout.component';
+import { PageNotPermittedComponent } from './page-not-permitted/page-not-permitted.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LayoutComponent } from './layout.component';
     TopbarComponent,
     LayoutComponent,
     MessageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PageNotPermittedComponent
   ],
   imports: [
     BrowserModule,

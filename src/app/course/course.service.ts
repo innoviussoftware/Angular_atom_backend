@@ -13,12 +13,15 @@ import { MessageService } from '../message.service';
   providedIn: 'root'
 })
 export class CourseService {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Accept': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('auth_token') })
+  };
 
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router) { }
 
   /** GET heroes from the server */
   getCourses(): Observable<Course[]> {
-    return this.http.get<Course[]>(AppConfig.API_ENDPOINT + 'courses')
+    return this.http.get<Course[]>(AppConfig.API_ENDPOINT + 'admin/courses', this.httpOptions)
   }
 
 
@@ -63,6 +66,8 @@ export class CourseService {
       // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       if (error.status == 422) {
         this.messageService.showErrors(error.error);
+      } else if(error.status == 404){
+        this.router.navigate(['page-not-found']);
       } else {
         alert('Something went wrong');
       }
