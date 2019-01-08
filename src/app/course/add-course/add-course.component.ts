@@ -6,6 +6,9 @@ import { CourseService } from '../course.service'
 import { CategoryService } from '../../category/category.service';
 import { Course } from '../course';
 
+import { User } from '../../user/user';
+import { WebinarService } from "../../webinar/webinar.service";
+
 declare var $: any;
 
 @Component({
@@ -17,6 +20,7 @@ export class AddCourseComponent implements OnInit {
   course: Course;
   categories: any[];
   addForm: FormGroup;
+  users:User[];
   auth_user = JSON.parse(localStorage.getItem("auth_user"));
 
 
@@ -25,6 +29,7 @@ export class AddCourseComponent implements OnInit {
     private route: ActivatedRoute,
     private courseService: CourseService,
     private categoryService: CategoryService,
+    private webinarService: WebinarService,
     private router: Router
   ) { }
 
@@ -34,7 +39,11 @@ export class AddCourseComponent implements OnInit {
     this.categoryService.getCategories()
       .subscribe(categories => this.categories = categories);
 
+    this.webinarService.getInstructors()
+         .subscribe(users => this.users = users);
+
     this.addForm = this.formBuilder.group({
+      primary_instructor_id: ['', Validators.required],
       category_id: ['', Validators.required],
       price: ['', Validators.required],
       duration: ['', Validators.required],
@@ -51,7 +60,7 @@ export class AddCourseComponent implements OnInit {
     const formModel = this.prepareSave();
     this.courseService.storeCourse(formModel)
       .subscribe(course => {
-        this.router.navigate(['/courses/edit/'+course.id+'/details']);
+        // this.router.navigate(['/courses/edit/'+course.id+'/details']);
         // window.scrollTo(0, 0);
       });
   }
@@ -66,7 +75,7 @@ export class AddCourseComponent implements OnInit {
   private prepareSave(): any {
     let input = new FormData();
     // This can be done a lot prettier; for example automatically assigning values by looping through `this.addForm.controls`, but we'll keep it as simple as possible here
-    input.append('user_id', this.auth_user.id);
+    input.append('primary_instructor_id', this.addForm.get('primary_instructor_id').value);
     input.append('name', this.addForm.get('name').value);
     input.append('category_id', this.addForm.get('category_id').value);
     input.append('price', this.addForm.get('price').value);

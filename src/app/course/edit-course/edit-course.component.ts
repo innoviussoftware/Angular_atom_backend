@@ -4,7 +4,10 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { CourseService } from '../course.service'
 import { CategoryService } from '../../category/category.service';
-import { Course } from '../course'
+import { Course } from '../course';
+
+import { User } from '../../user/user';
+import { WebinarService } from "../../webinar/webinar.service";
 declare var $: any;
 
 
@@ -18,12 +21,15 @@ export class EditCourseComponent implements OnInit {
   categories: any[];
   editForm: FormGroup;
   id: number;
+  users: User[];
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private courseService: CourseService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private webinarService: WebinarService,
+
   ) {
     this.id = +this.route.snapshot.paramMap.get('id');
   }
@@ -34,7 +40,7 @@ export class EditCourseComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       id: ['', Validators.required],
-      user_id: ['', Validators.required],
+      primary_instructor_id: ['', Validators.required],
       category_id: ['', Validators.required],
       name: ['', Validators.required],
       language: ['', Validators.required],
@@ -51,17 +57,28 @@ export class EditCourseComponent implements OnInit {
     this.categoryService.getCategories()
       .subscribe(categories => this.categories = categories);
 
+    this.webinarService.getInstructors()
+       .subscribe(users => this.users = users);
+
     this.courseService.getCourse(this.id)
       .subscribe(course => {
-        delete course.instructors;
-        delete course.users;
-        delete course.category;
-        delete course.updated_at;
-        delete course.created_at;
         course.status = String(course.status);
-        this.editForm.setValue(course);
+        this.editForm.controls['id'].setValue(course.id);
+        this.editForm.controls['category_id'].setValue(course.category_id);
+        this.editForm.controls['name'].setValue(course.name);
+        this.editForm.controls['price'].setValue(course.price);
+        this.editForm.controls['duration'].setValue(course.duration);
+        this.editForm.controls['duration_units'].setValue(course.duration_units);
+        this.editForm.controls['long_description'].setValue(course.long_description);
+        this.editForm.controls['short_description'].setValue(course.short_description);
+        this.editForm.controls['image'].setValue(course.image);
+        this.editForm.controls['status'].setValue(course.status);
+        for(var i = 0; i < course.instructors.length; i++){
+            if (course.instructors[i].pivot.is_primary == 1) {
+              this.editForm.controls['primary_instructor_id'].setValue(course.instructors[i].id);
+            }
+        }
       });
-
   }
 
   onSubmit() {

@@ -17,5 +17,5 @@ export class User {
   token: string;
   courses: Course[];
   skype:string;
-
+  pivot:any;
 }

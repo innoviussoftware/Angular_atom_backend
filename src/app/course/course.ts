@@ -7,6 +7,7 @@ export class Course {
   name: string;
   price: string;
   long_description:string;
+  short_description:string;
   category_id:number;
   duration:number;
   duration_units:string;
