@@ -22,7 +22,7 @@ export class WebinarService {
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router) { }
 
   getWebinars(): Observable<Webinar[]> {
-    return this.http.get<Webinar[]>(AppConfig.API_ENDPOINT + 'webinars')
+    return this.http.get<Webinar[]>(AppConfig.API_ENDPOINT + 'admin/webinars',this.httpOptions)
   }
 
   getInstructors(): Observable<User[]> {
@@ -30,7 +30,7 @@ export class WebinarService {
   }
 
   getCourses(): Observable<Course[]> {
-    return this.http.get<Course[]>(AppConfig.API_ENDPOINT + 'courses', this.httpOptions)
+    return this.http.get<Course[]>(AppConfig.API_ENDPOINT + 'admin/courses', this.httpOptions)
   }
 
   storeWebinar(webinar: Webinar): Observable<Webinar> {
