@@ -23,6 +23,9 @@ export class EditWebinarComponent implements OnInit {
   courses = [];
   auth_user = JSON.parse(localStorage.getItem("auth_user"));
   instructor = (this.auth_user.role == 'instructor') ? this.auth_user.id : '';
+  dropdownSettings = {};
+  dropdownList = [];
+  selectedItems = [];
 
   constructor(private formBuilder: FormBuilder, private webinarService: WebinarService, private route: ActivatedRoute) {
     this.id = +this.route.snapshot.paramMap.get('id');
@@ -59,6 +62,12 @@ export class EditWebinarComponent implements OnInit {
         delete webinar.updated_at;
         this.editForm.setValue(webinar);
       });
+  }
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
   }
   getCourses(): void {
     this.webinarService.getCourses()
