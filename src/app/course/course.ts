@@ -1,6 +1,4 @@
-import { Material } from './material';
 import { Category } from '../category/category';
-import { CModule } from './c-module';
 import { Chapter } from './chapter';
 import { User } from '../user/user';
 
@@ -15,10 +13,10 @@ export class Course {
   language:string;
   image: string;
   status: string;
-  user: User[];
+  is_enrollled: string;
+  instructors: User[];
+  users: User[];
   category: Category[];
-  materials: Material[];
-  modules: CModule[];
   chapters: Chapter[];
   updated_at: string;
   created_at: string;

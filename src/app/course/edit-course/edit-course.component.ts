@@ -53,10 +53,9 @@ export class EditCourseComponent implements OnInit {
 
     this.courseService.getCourse(this.id)
       .subscribe(course => {
-        delete course.user;
+        delete course.instructors;
+        delete course.users;
         delete course.category;
-        delete course.materials;
-        delete course.modules;
         delete course.updated_at;
         delete course.created_at;
         course.status = String(course.status);

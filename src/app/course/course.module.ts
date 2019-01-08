@@ -9,8 +9,6 @@ import { CoursegridComponent } from './coursegrid/coursegrid.component';
 import { CourseComponent } from './course/course.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
-import { MaterialComponent } from './material/material.component';
-import { CModuleComponent } from './c-module/c-module.component';
 import { ChapterComponent } from './chapter/chapter.component';
 
 
@@ -20,8 +18,6 @@ import { ChapterComponent } from './chapter/chapter.component';
     CourseComponent,
     AddCourseComponent,
     EditCourseComponent,
-    MaterialComponent,
-    CModuleComponent,
     ChapterComponent,
   ],
   imports: [

@@ -4,8 +4,6 @@ import { CoursegridComponent } from './coursegrid/coursegrid.component';
 import { CourseComponent } from './course/course.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
-import { MaterialComponent } from './material/material.component';
-import { CModuleComponent } from './c-module/c-module.component';
 import { ChapterComponent } from './chapter/chapter.component';
 
 import { LayoutComponent } from '../layout/layout.component';
@@ -23,8 +21,6 @@ const COURSES_ROUTES: Routes = [
         {path : ':id', component : CourseComponent},
         {path : 'edit/:id/details', component : EditCourseComponent},
         {path : 'edit/:id/chapters', component : ChapterComponent},
-        {path : 'edit/:id/materials', component : MaterialComponent},
-        {path : 'edit/:id/modules', component : CModuleComponent},
       ]
   }
 
