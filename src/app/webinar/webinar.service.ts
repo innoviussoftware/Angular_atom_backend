@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 
 import { Webinar } from './webinar';
 import { User } from '../user/user';
+import { Course } from '../course/course';
 import { AppConfig } from '../app-config';
 import { MessageService } from '../message.service';
 
@@ -15,7 +16,9 @@ import { MessageService } from '../message.service';
   providedIn: 'root'
 })
 export class WebinarService {
-
+  httpOptions = {
+    headers: new HttpHeaders({ 'Accept': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('auth_token') })
+  };
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router) { }
 
   getWebinars(): Observable<Webinar[]> {
@@ -24,6 +27,10 @@ export class WebinarService {
 
   getInstructors(): Observable<User[]> {
     return this.http.get<User[]>(AppConfig.API_ENDPOINT + 'webinars/get/instructors');
+  }
+
+  getCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(AppConfig.API_ENDPOINT + 'courses', this.httpOptions)
   }
 
   storeWebinar(webinar: Webinar): Observable<Webinar> {

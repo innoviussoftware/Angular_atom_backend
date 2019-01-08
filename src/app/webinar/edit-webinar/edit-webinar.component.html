@@ -22,10 +22,8 @@
                 <input type="text" class="form-control" formControlName="title" />
               </div>
               <div class="form-group">
-                <label for="webinar-title">Instructors</label><span class="text-danger">*</span>
-                <select class="form-control" formControlName="instructors">
-                  <option *ngFor="let instructor of users" value="{{ instructor.id }}">{{ instructor.name }}</option>
-                </select>
+                <label for="webinar-url">URL</label><span class="text-danger">*</span>
+                <input type="text" formControlName="url" class="form-control"/>
               </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xs-12">
@@ -33,19 +31,42 @@
                 <label for="webinar-date">Date Time</label><span class="text-danger">*</span>
                 <input type="text" id="date_time" formControlName="date_time" class="form-control"/>
               </div>
-              <div class="form-group">
-                <label for="webinar-url">URL</label><span class="text-danger">*</span>
-                <input type="text" formControlName="url" class="form-control"/>
+              <div class="form-group" *ngIf="auth_user.role == 'admin'">
+                <label for="webinar-title">Instructors</label><span class="text-danger">*</span>
+                <select class="form-control" formControlName="instructors">
+                  <option *ngFor="let instructor of users" value="{{ instructor.id }}">{{ instructor.name }}</option>
+                </select>
+              </div>
+
+              <div class="form-group" *ngIf="auth_user.role == 'instructor'">
+                <input type="hidden" formControlName="instructors" value="{{ auth_user.id }}">
               </div>
             </div>
             <div class="col-12">
+              <div class="form-group">
+                <label for="webinar-title">Co-Instructors</label><span class="text-danger">*</span>
+                <ng-multiselect-dropdown formControlName="co_instructors"
+                [placeholder]="'select co-instructors'"
+                [data]="users"
+                [(ngModel)]="selectedItems"
+                [settings]="dropdownSettings"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+              </div>
+              <div class="form-group">
+                <label for="webinar-title">Courses</label><span class="text-danger">*</span>
+                <select class="form-control" formControlName="course_id">
+                  <<option value="">select course</option>
+                  <option *ngFor="let course of courses" value="{{ course.id }}">{{ course.name }}</option>
+                </select>
+              </div>
               <div class="form-group">
                 <label for="webinar-short-description">Short Description</label><span class="text-danger">*</span>
                 <textarea formControlName="short_description" rows="2" class="form-control"></textarea>
               </div>
               <div class="form-group">
                 <label for="webinar-long-description">Long Description</label><span class="text-danger">*</span>
-                <textarea formControlName="long_description" rows="15" class="form-control"></textarea>
+                <ck-editor formControlName="long_description" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
               </div>
               <button type="submit" class="btn btn-gradient-primary mr-2" id="submit_btn">Update</button>
               <a class="btn btn-light" routerLink='/webinars'>Cancel</a>

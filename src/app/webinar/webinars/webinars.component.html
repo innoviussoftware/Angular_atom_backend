@@ -23,10 +23,9 @@
             <tr>
               <th>Id</th>
               <th>Title</th>
-              <th>URL</th>
+              <th>Course</th>
               <th>Instructor</th>
               <th>Date Time</th>
-              <!-- <th>Short Description</th> -->
               <th>Action</th>
             </tr>
           </thead>
@@ -34,15 +33,18 @@
             <tr *ngFor="let webinar of webinars">
               <td>{{ webinar.id }}</td>
               <td>{{ webinar.title }}</td>
-              <td><a href="{{ webinar.url }}">{{ webinar.url }}</a></td>
+              <td>
+                <a routerLink='/courses/{{ (webinar.course) ? (webinar.course.course_data.id) ? webinar.course.course_data.id : "":"" }}'>
+                  {{ (webinar.course) ? (webinar.course.course_data.name) ? webinar.course.course_data.name : "" : "" }}
+                </a>
+              </td>
               <td>{{ webinar.user.name +' '+ webinar.user.last_name }}</td>
               <td>{{ webinar.date_time }}</td>
-              <!-- <td>{{ webinar.short_description }}</td> -->
               <td>
                 <button routerLink='/webinars/edit/{{ webinar.id }}/details' type="button" class="btn btn-inverse-info btn-rounded btn-icon">
                   <i class="mdi mdi-table-edit"></i>
                 </button>
-                <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon"  (click)="delete(webinar)">
+                <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon" (click)="delete(webinar)">
                   <i class="mdi mdi-delete-forever"></i>
                 </button>
               </td>

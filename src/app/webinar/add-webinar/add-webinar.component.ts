@@ -19,23 +19,53 @@ export class AddWebinarComponent implements OnInit {
   webinar: Webinar;
   isDisabled = false;
   users = [];
+  courses = [];
+  auth_user = JSON.parse(localStorage.getItem("auth_user"));
+  instructor = (this.auth_user.role == 'instructor') ? this.auth_user.id : '';
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
 
   constructor(private formBuilder: FormBuilder, private webinarService: WebinarService) { }
 
   ngOnInit() {
     this.getInstructors();
+    this.getCourses();
     this.addForm = this.formBuilder.group({
       title: ['', Validators.required],
       date_time: ['', Validators.required],
       url: ['', Validators.required],
-      instructors: ['', Validators.required],
+      instructors: [this.instructor, Validators.required],
       short_description: ['', Validators.required],
-      long_description: ['', Validators.required]
+      long_description: ['', Validators.required],
+      user_id: [this.auth_user.id, Validators.required],
+      course_id: ['', Validators.required],
+      co_instructors: ['', Validators.required]
     });
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Remove All',
+      allowSearchFilter: true
+    };
+
+  }
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+  getCourses(): void {
+    this.webinarService.getCourses()
+      .subscribe(courses => this.courses = courses);
   }
 
   getInstructors(): void {
-   this.webinarService.getInstructors()
+    this.webinarService.getInstructors()
       .subscribe(users => this.users = users);
   }
 

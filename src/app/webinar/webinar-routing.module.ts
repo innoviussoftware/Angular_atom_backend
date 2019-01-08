@@ -10,14 +10,14 @@ import { CheckAuth } from '../auth/check-auth.guard';
 
 const WEBINAR_ROUTES: Routes = [
   {
-      path: 'webinars',
-      component: LayoutComponent,
-      canActivate:[CheckAuth],
-      children: [
-        {path : '', component : WebinarsComponent},
-        {path : 'add', component : AddWebinarComponent},
-        {path : 'edit/:id/details', component : EditWebinarComponent}
-      ]
+    path: 'webinars',
+    component: LayoutComponent,
+    canActivate: [CheckAuth],
+    children: [
+      { path: '', component: WebinarsComponent },
+      { path: 'add', component: AddWebinarComponent },
+      { path: 'edit/:id/details', component: EditWebinarComponent }
+    ]
   }
 
 

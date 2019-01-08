@@ -20,6 +20,9 @@ export class EditWebinarComponent implements OnInit {
   isDisabled = false;
   users = [];
   id: number;
+  courses = [];
+  auth_user = JSON.parse(localStorage.getItem("auth_user"));
+  instructor = (this.auth_user.role == 'instructor') ? this.auth_user.id : '';
 
   constructor(private formBuilder: FormBuilder, private webinarService: WebinarService, private route: ActivatedRoute) {
     this.id = +this.route.snapshot.paramMap.get('id');
@@ -27,17 +30,28 @@ export class EditWebinarComponent implements OnInit {
 
   ngOnInit() {
     this.getInstructors();
-
+    this.getCourses();
     this.editForm = this.formBuilder.group({
       id: ['', Validators.required],
       title: ['', Validators.required],
       date_time: ['', Validators.required],
       url: ['', Validators.required],
-      instructors: ['', Validators.required],
+      instructors: [this.instructor, Validators.required],
       short_description: ['', Validators.required],
-      long_description: ['', Validators.required]
+      long_description: ['', Validators.required],
+      user_id: ['', Validators.required],
+      course_id: ['', Validators.required],
+      co_instructors: ['', Validators.required]
     });
 
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Remove All',
+      allowSearchFilter: true
+    };
     this.webinarService.getWebinar(this.id)
       .subscribe(webinar => {
         delete webinar.status;
@@ -45,9 +59,11 @@ export class EditWebinarComponent implements OnInit {
         delete webinar.updated_at;
         this.editForm.setValue(webinar);
       });
-      console.log(this.webinar);
   }
-
+  getCourses(): void {
+    this.webinarService.getCourses()
+      .subscribe(courses => this.courses = courses);
+  }
   getInstructors(): void {
     this.webinarService.getInstructors()
       .subscribe(users => this.users = users);
