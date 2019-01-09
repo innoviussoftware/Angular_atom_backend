@@ -1,4 +1,6 @@
 import { Course } from '../course/course';
+import { Webinar } from '../webinar/webinar';
+
 export class User {
   id: number;
   name: string;
@@ -18,4 +20,5 @@ export class User {
   courses: Course[];
   skype:string;
   pivot:any;
+  webinars:Webinar[];
 }
