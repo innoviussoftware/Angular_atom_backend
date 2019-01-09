@@ -56,7 +56,7 @@
               <div class="form-group">
                 <label for="webinar-title">Course</label>
                 <select class="form-control" formControlName="course_id">
-                  <<option value="">select course</option>
+                  <option value="">select course</option>
                   <option *ngFor="let course of courses" value="{{ course.id }}">{{ course.name }}</option>
                 </select>
               </div>

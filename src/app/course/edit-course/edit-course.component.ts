@@ -22,6 +22,9 @@ export class EditCourseComponent implements OnInit {
   editForm: FormGroup;
   id: number;
   users: User[];
+  dropdownSettings = {};
+  dropdownList = [];
+  selectedItems = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,6 +44,7 @@ export class EditCourseComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       id: ['', Validators.required],
       primary_instructor_id: ['', Validators.required],
+      co_instructors: ['', Validators.required],
       category_id: ['', Validators.required],
       name: ['', Validators.required],
       language: ['', Validators.required],
@@ -53,12 +57,24 @@ export class EditCourseComponent implements OnInit {
       status: ['0', Validators.required],
     });
 
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Remove All',
+      allowSearchFilter: true
+    };
+
+
 
     this.categoryService.getCategories()
       .subscribe(categories => this.categories = categories);
 
     this.webinarService.getInstructors()
-       .subscribe(users => this.users = users);
+       .subscribe(users => {
+         this.users = users;
+       });
 
     this.courseService.getCourse(this.id)
       .subscribe(course => {
@@ -73,14 +89,23 @@ export class EditCourseComponent implements OnInit {
         this.editForm.controls['short_description'].setValue(course.short_description);
         this.editForm.controls['image'].setValue(course.image);
         this.editForm.controls['status'].setValue(course.status);
+        this.editForm.controls['co_instructors'].setValue(this.users);
+
         for(var i = 0; i < course.instructors.length; i++){
             if (course.instructors[i].pivot.is_primary == 1) {
               this.editForm.controls['primary_instructor_id'].setValue(course.instructors[i].id);
+            } else{
+              this.selectedItems.push(course.instructors[i]);
             }
         }
       });
   }
-
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
   onSubmit() {
     this.courseService.updateCourse(this.editForm.value, this.id)
       .subscribe(course => this.course = course);

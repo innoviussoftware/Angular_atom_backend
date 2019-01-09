@@ -22,6 +22,7 @@ export class AddCourseComponent implements OnInit {
   addForm: FormGroup;
   users:User[];
   auth_user = JSON.parse(localStorage.getItem("auth_user"));
+  dropdownSettings = {};
 
 
   constructor(
@@ -44,6 +45,7 @@ export class AddCourseComponent implements OnInit {
 
     this.addForm = this.formBuilder.group({
       primary_instructor_id: ['', Validators.required],
+      co_instructor_id: [[], Validators.required],
       category_id: ['', Validators.required],
       price: ['', Validators.required],
       duration: ['', Validators.required],
@@ -54,6 +56,16 @@ export class AddCourseComponent implements OnInit {
       image: [null, Validators.required],
       status: ['0', Validators.required],
     });
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Remove All',
+      allowSearchFilter: true
+    };
+
   }
 
   onSubmit() {
@@ -71,11 +83,22 @@ export class AddCourseComponent implements OnInit {
       this.addForm.get('image').setValue(file);
     }
   }
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
 
   private prepareSave(): any {
     let input = new FormData();
+
     // This can be done a lot prettier; for example automatically assigning values by looping through `this.addForm.controls`, but we'll keep it as simple as possible here
     input.append('primary_instructor_id', this.addForm.get('primary_instructor_id').value);
+    let ids = this.addForm.get('co_instructor_id').value;
+    for(var i = 0; i < ids.length; i++){
+      input.append('co_instructor_id[]', ids[i].id);
+    }
     input.append('name', this.addForm.get('name').value);
     input.append('category_id', this.addForm.get('category_id').value);
     input.append('price', this.addForm.get('price').value);
