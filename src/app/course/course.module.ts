@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from '@angular/router';
 import { CKEditorModule } from 'ngx-ckeditor';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 import { CourseRoutingModule } from './course-routing.module';
 import { CoursegridComponent } from './coursegrid/coursegrid.component';
@@ -26,7 +28,8 @@ import { ChapterComponent } from './chapter/chapter.component';
     ReactiveFormsModule,
     FormsModule,
     CKEditorModule,
-    RouterModule
+    RouterModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
 })
 
