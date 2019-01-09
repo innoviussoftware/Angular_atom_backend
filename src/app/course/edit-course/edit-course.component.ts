@@ -74,7 +74,6 @@ export class EditCourseComponent implements OnInit {
     this.webinarService.getInstructors()
        .subscribe(users => {
          this.users = users;
-         console.log(this.courses);
        });
 
     this.courseService.getCourse(this.id)
