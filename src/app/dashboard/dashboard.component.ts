@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
         this.courses = dashboard.courses;
         this.course_count = dashboard.course_count;
         this.users = dashboard.users;
-        // console.log(this.dashboard);
+        console.log(dashboard.courses);
       });
   }
 

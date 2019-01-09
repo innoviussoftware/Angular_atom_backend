@@ -89,13 +89,11 @@ export class EditCourseComponent implements OnInit {
         this.editForm.controls['short_description'].setValue(course.short_description);
         this.editForm.controls['image'].setValue(course.image);
         this.editForm.controls['status'].setValue(course.status);
-        this.editForm.controls['co_instructors'].setValue(this.users);
+        this.editForm.controls['co_instructors'].setValue(course.instructors);
 
         for(var i = 0; i < course.instructors.length; i++){
             if (course.instructors[i].pivot.is_primary == 1) {
               this.editForm.controls['primary_instructor_id'].setValue(course.instructors[i].id);
-            } else{
-              this.selectedItems.push(course.instructors[i]);
             }
         }
       });
