@@ -4,8 +4,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserlistComponent } from './userlist/userlist.component';
 import { UserComponent } from './user/user.component';
 
-
-
 @NgModule({
   declarations: [
     UserlistComponent,

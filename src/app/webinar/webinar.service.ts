@@ -30,7 +30,7 @@ export class WebinarService {
   }
 
   getCourses(): Observable<Course[]> {
-    return this.http.get<Course[]>(AppConfig.API_ENDPOINT + 'admin/courses', this.httpOptions)
+    return this.http.get<Course[]>(AppConfig.API_ENDPOINT + 'courses', this.httpOptions)
   }
 
   storeWebinar(webinar: Webinar): Observable<Webinar> {

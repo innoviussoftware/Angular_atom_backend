@@ -18,7 +18,7 @@
           <div class="col-md-3 col-lg-3 col-xs-12">
             <div class="social-icon float-left">
               <div class="thumbnail">
-                <img src="assets/images/faces/face1.jpg"/>
+                <img src="assets/images/faces/face1.jpg" />
               </div>
               <br>
               <div class="text-muted mb-2">
@@ -42,21 +42,47 @@
             <p *ngIf="user.biography"><b><u>Short Info</u> </b><br><small>{{ user.short_description }}</small></p>
           </div>
         </div>
-        <br>
-        <br>
-        <h4>Enrolled courses</h4>
-        <ul class="list-group" *ngIf="user.courses.length > 0; else elsepart">
-          <a href="#" routerLink="/courses/{{ course.id }}" *ngFor="let course of user.courses" class="list-group-item list-group-item-action">{{ course.name }}
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" [style.min-width.%]="2" [style.width.%]="course.course_completed_per">
-              {{ course.course_completed_per }}%
+
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-xs-12">
+            <br>
+            <br>
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#courses">Enrolled Courses</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#webinars">Enrolled Webinars</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <br>
+              <div id="courses" class="tab-pane active">
+                <ul class="list-group" *ngIf="user.courses.length > 0; else elsepart">
+                  <a href="#" routerLink="/courses/{{ course.id }}" *ngFor="let course of user.courses" class="list-group-item list-group-item-action">{{ course.name }}
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" [style.min-width.%]="2" [style.width.%]="course.course_completed_per">
+                        {{ course.course_completed_per }}%
+                      </div>
+                    </div>
+                  </a>
+                </ul>
+              </div>
+              <div id="webinars" class="tab-pane">
+                <ul class="list-group" *ngIf="user.webinars.length > 0; else elsepart">
+                  <li *ngFor="let webinar of user.webinars" class="list-group-item">
+                  <a href="#" routerLink="/webinars" class=" list-group-item-action">{{ webinar.title }}<span class="float-right">{{ webinar.date_time }}</span></a><br>
+                  <a target="_blank" href="{{ webinar.url }}"><small>Click to view</small></a>
+                  </li>
+                </ul>
+              </div>
             </div>
+            <ng-template #elsepart>
+              <p class="text-muted">User has no any course enrolled yet.</p>
+            </ng-template>
           </div>
-          </a>
-        </ul>
-        <ng-template #elsepart>
-          <p class="text-muted">User has no any course enrolled yet.</p>
-        </ng-template>
+        </div>
       </div>
     </div>
   </div>

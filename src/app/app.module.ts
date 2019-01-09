@@ -33,7 +33,7 @@ import { WebinarModule } from './webinar/webinar.module';
     CategoryModule,
     AuthModule,
     UserModule,
-    WebinarModule,
+    WebinarModule
   ],
   providers: [CheckAuth,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
