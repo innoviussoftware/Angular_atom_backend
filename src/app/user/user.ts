@@ -19,6 +19,7 @@ export class User {
   token: string;
   courses: Course[];
   skype:string;
+  is_approved:number;
   pivot:any;
   webinars:Webinar[];
 }

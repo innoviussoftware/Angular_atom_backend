@@ -27,6 +27,7 @@
               <th>Email</th>
               <th>Contact No.</th>
               <th>Action</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -45,6 +46,12 @@
                 <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon"  (click)="delete(user)">
                   <i class="mdi mdi-delete-forever"></i>
                 </button>
+              </td>
+              <td>
+                <select class="form-control" (change)="doApprove($event,user);">
+                  <option value="1"  [selected]="user.is_approved == 1" >Approved</option>
+                  <option value="0"  [selected]="user.is_approved == 0" >Not Approved</option>
+                </select>
               </td>
             </tr>
           </tbody>

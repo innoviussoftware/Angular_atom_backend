@@ -45,6 +45,14 @@ export class UserService {
     );
   }
 
+  update(user: User, id): Observable<User>{
+    return this.http.patch<User>(AppConfig.API_ENDPOINT + 'users/' + id, user, this.httpOptions)
+    .pipe(
+      tap(_ => this.messageService.showMessage('User updated successfully.')),
+      // tap(_ => this.router.navigate(['courses'])),
+      catchError(this.handleError<User>('update Chapter'))
+    )
+  }
   /**
  * Handle Http operation that failed.
  * Let the app continue.

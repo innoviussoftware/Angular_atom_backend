@@ -74,8 +74,8 @@ export class AddCourseComponent implements OnInit {
     const formModel = this.prepareSave();
     this.courseService.storeCourse(formModel)
       .subscribe(course => {
-        // this.router.navigate(['/courses/edit/'+course.id+'/details']);
-        // window.scrollTo(0, 0);
+        this.router.navigate(['/courses/edit/'+course.id+'/details']);
+        window.scrollTo(0, 0);
       });
   }
 
