@@ -23,6 +23,8 @@ export class AddCourseComponent implements OnInit {
   users:User[];
   auth_user = JSON.parse(localStorage.getItem("auth_user"));
   dropdownSettings = {};
+  dropdownList = [];
+  selectedItems = [];
 
 
   constructor(
