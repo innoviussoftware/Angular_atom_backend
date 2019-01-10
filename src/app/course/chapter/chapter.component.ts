@@ -138,6 +138,7 @@ export class ChapterComponent implements OnInit {
     this.contentImageForm.controls['priority'].setValue(content ? content.priority : 0);
     this.contentImageForm.controls['content'].setValue(content ? content.content : '');
     this.image_upload.delete('image');
+    this.fileInput.nativeElement.value = "";
     $('#image_modal').modal('show');
   }
 
