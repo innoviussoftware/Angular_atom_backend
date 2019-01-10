@@ -21,38 +21,27 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Id</th>
+              <th>Sr. No.</th>
               <th>Full Name</th>
-              <!-- <th>Role</th> -->
               <th>Email</th>
               <th>Contact No.</th>
               <th>Action</th>
-              <!-- <th></th> -->
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users">
-              <td>{{ user.id }}</td>
+            <tr *ngFor="let user of users; let i = index;">
+              <td>{{ i + 1 }}</td>
               <td>{{ user.name+' '+user.last_name }}</td>
-              <!-- <td>
-                <span *ngFor="let role of user.roles">{{ role.display_name }}</span>
-              </td> -->
               <td>{{ user.email }}</td>
               <td>{{ user.contact_number }}</td>
               <td>
                 <button type="button" class="btn btn-inverse-info btn-rounded btn-icon" routerLink="/users/{{ user.id }}">
                   <i class="mdi mdi-eye"></i>
                 </button>
-                <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon"  (click)="delete(user)">
+                <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon" (click)="delete(user)">
                   <i class="mdi mdi-delete-forever"></i>
                 </button>
-              </td>
-              <!-- <td>
-                <select class="form-control" (change)="doApprove($event,user);">
-                  <option value="1"  [selected]="user.is_approved == 1" >Approved</option>
-                  <option value="0"  [selected]="user.is_approved == 0" >Not Approved</option>
-                </select>
-              </td> -->
+              </td>              
             </tr>
           </tbody>
         </table>
