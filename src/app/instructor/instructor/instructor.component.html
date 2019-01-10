@@ -1,12 +1,12 @@
 <div class="page-header">
   <h3 class="page-title">
-    User Details
+    Instructor Details
   </h3>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
-      <li class="breadcrumb-item"><a routerLink="/users">Users</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Single User</li>
+      <li class="breadcrumb-item"><a routerLink="/instructors">Instructors</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Single Instructor</li>
     </ol>
   </nav>
 </div>
@@ -70,19 +70,19 @@
                 </ul>
               </div>
               <ng-template #elsepart>
-                <p class="text-muted">User yet not enrolled any course.</p>
+                <p class="text-muted">Instructor yet not enrolled any course.</p>
               </ng-template>
               <div id="webinars" class="tab-pane">
                 <ul class="list-group" *ngIf="user.webinars.length > 0; else elsepartwebinar">
                   <li *ngFor="let webinar of user.webinars" class="list-group-item">
-                  <a href="#" routerLink="/webinars" class=" list-group-item-action">{{ webinar.title }}<span class="float-right">{{ webinar.date_time }}</span></a><br>
-                  <a target="_blank" href="{{ webinar.url }}"><small>Click to view</small></a>
+                    <a href="#" routerLink="/webinars" class=" list-group-item-action">{{ webinar.title }}<span class="float-right">{{ webinar.date_time }}</span></a><br>
+                    <a target="_blank" href="{{ webinar.url }}"><small>Click to view</small></a>
                   </li>
                 </ul>
               </div>
             </div>
             <ng-template #elsepartwebinar>
-              <p class="text-muted">User yet not enrolled any webinar.</p>
+              <p class="text-muted">Instructor yet not enrolled any webinar.</p>
             </ng-template>
           </div>
         </div>

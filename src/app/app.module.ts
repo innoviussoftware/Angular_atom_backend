@@ -17,12 +17,13 @@ import { LayoutModule } from './layout/layout.module';
 import { UserModule } from './user/user.module';
 import { CheckAuth } from './auth/check-auth.guard';
 import { WebinarModule } from './webinar/webinar.module';
+import { InstructorModule } from './instructor/instructor.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    FormComponent
+    FormComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +34,7 @@ import { WebinarModule } from './webinar/webinar.module';
     CategoryModule,
     AuthModule,
     UserModule,
+    InstructorModule,
     WebinarModule
   ],
   providers: [CheckAuth,{provide: LocationStrategy, useClass: HashLocationStrategy}],

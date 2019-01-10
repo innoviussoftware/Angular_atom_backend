@@ -18,7 +18,7 @@
           <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
             <h2 class="section-title">{{webinar.title}}</h2>
             <div class="text-muted mb-3 mt-3">
-              <i class="mdi mdi-account-circle text-primary"></i> Instructor: {{ webinar.user.name + ' ' + webinar.user.last_name }}
+              <i *ngIf="webinar.user" class="mdi mdi-account-circle text-primary"></i> {{ (webinar.user) ? 'Instructor: '+ webinar.user.name + ' ' + webinar.user.last_name : '' }}
               <small><i class="mdi mdi-checkbox-blank-circle text-muted"></i></small>&nbsp;
               <i class="mdi mdi-clock text-primary"></i> {{ webinar.date_time }}
             </div>
@@ -33,8 +33,8 @@
               </a>
             </h5>
 
-            <h5><u>Co-Insructors</u></h5>
-            <ul class="list-group list-unstyled mb-3">
+            <h5 *ngIf="webinar.co_instructors.length > 0;"><u>Co-Insructors</u></h5>
+            <ul *ngIf="webinar.co_instructors.length > 0;" class="list-group list-unstyled mb-3">
               <li *ngFor="let co_instructor of webinar.co_instructors"><i class="mdi mdi-check"></i> {{ co_instructor.name }}</li>
             </ul>
           </div>

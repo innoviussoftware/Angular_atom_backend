@@ -22,8 +22,8 @@ export class UserService {
 
   constructor(private http: HttpClient, private messageService: MessageService, private authService: AuthService, private router: Router) { }
 
-  getAll(): Observable<User[]> {
-    return this.http.get<User[]>(AppConfig.API_ENDPOINT + 'users',this.httpOptions)
+  getAll(role): Observable<User[]> {
+    return this.http.get<User[]>(AppConfig.API_ENDPOINT + 'users?role='+role,this.httpOptions)
     .pipe(
       catchError(this.handleError<User[]>('get users'))
     )

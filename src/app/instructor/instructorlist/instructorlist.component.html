@@ -1,14 +1,11 @@
 <div class="page-header">
   <h3 class="page-title">
-    Users
+    Instructors
   </h3>
-  <!-- <a routerLink="/categories/add" class="btn btn-inverse-success">
-    Add Categories <i class="mdi mdi-plus-circle"></i>
-  </a> -->
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Users</li>
+      <li class="breadcrumb-item active" aria-current="page">Instructors</li>
     </ol>
   </nav>
 </div>
@@ -27,7 +24,7 @@
               <th>Email</th>
               <th>Contact No.</th>
               <th>Action</th>
-              <!-- <th></th> -->
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -40,19 +37,19 @@
               <td>{{ user.email }}</td>
               <td>{{ user.contact_number }}</td>
               <td>
-                <button type="button" class="btn btn-inverse-info btn-rounded btn-icon" routerLink="/users/{{ user.id }}">
+                <button type="button" class="btn btn-inverse-info btn-rounded btn-icon" routerLink="/instructors/{{ user.id }}">
                   <i class="mdi mdi-eye"></i>
                 </button>
                 <button type="button" class="btn btn-inverse-danger btn-rounded btn-icon"  (click)="delete(user)">
                   <i class="mdi mdi-delete-forever"></i>
                 </button>
               </td>
-              <!-- <td>
+              <td>
                 <select class="form-control" (change)="doApprove($event,user);">
                   <option value="1"  [selected]="user.is_approved == 1" >Approved</option>
                   <option value="0"  [selected]="user.is_approved == 0" >Not Approved</option>
                 </select>
-              </td> -->
+              </td>
             </tr>
           </tbody>
         </table>

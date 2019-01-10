@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from '../user.service';
-import { User } from '../user';
+import { UserService } from '../../user/user.service';
+import { User } from '../../user/user';
 declare var $: any;
 
 
 @Component({
-  selector: 'app-userlist',
-  templateUrl: './userlist.component.html',
+  selector: 'app-instructorlist',
+  templateUrl: './instructorlist.component.html',
   // styleUrls: ['./categories.component.css']
 })
-export class UserlistComponent implements OnInit {
+export class InstructorlistComponent implements OnInit {
   users: User[];
   user: User;
 
@@ -21,18 +21,18 @@ export class UserlistComponent implements OnInit {
   }
 
   getUserlist(): void {
-    this.userService.getAll('user')
+    this.userService.getAll('instructor')
       .subscribe(users => this.users = users);
   }
 
   delete(user: User) {
-    if (confirm('are you sure you want to delete this user?')) {
+    if (confirm('are you sure you want to delete this instructor?')) {
       this.userService.delete(user).subscribe();
       this.users = this.users.filter(u => u !== user);
     }
   }
 
-  doApprove(event: any, user:User): void {
+  doApprove(event: any, user: User): void {
     user.is_approved = event.target.value;
     this.updateUser(user);
   }
