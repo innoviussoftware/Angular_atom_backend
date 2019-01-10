@@ -25,8 +25,8 @@ export class WebinarService {
     return this.http.get<Webinar[]>(AppConfig.API_ENDPOINT + 'admin/webinars', this.httpOptions)
   }
 
-  getInstructors(): Observable<User[]> {
-    return this.http.get<User[]>(AppConfig.API_ENDPOINT + 'webinars/get/instructors');
+  getInstructors(not_user=0): Observable<User[]> {
+    return this.http.get<User[]>(AppConfig.API_ENDPOINT + 'webinars/get/instructors?user_id=' + not_user);
   }
 
   getCourses(): Observable<Course[]> {

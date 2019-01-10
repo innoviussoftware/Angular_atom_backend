@@ -71,8 +71,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of webinar.get_enrolled_users">
-              <td>{{ user.id }}</td>
+            <tr *ngFor="let user of webinar.get_enrolled_users; let i = index;">
+              <td>{{ i + 1 }}</td>
               <td>{{ user.name+' '+user.last_name }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.contact_number }}</td>

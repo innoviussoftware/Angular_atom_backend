@@ -33,7 +33,7 @@
               </div>
               <div class="form-group" *ngIf="auth_user.role == 'admin'">
                 <label for="webinar-title">Instructors</label><span class="text-danger">*</span>
-                <select class="form-control" formControlName="instructors">
+                <select class="form-control" formControlName="instructors" (change)="onSelectChange($event)">
                   <option *ngFor="let instructor of users" value="{{ instructor.id }}">{{ instructor.name }}</option>
                 </select>
               </div>
@@ -53,15 +53,15 @@
                 <div class="col-md-6 col-lg-6 col-xs-12">
                   <div class="form-group">
                     <label for="webinar-title">Co-Instructors</label>
-                    <ng-multiselect-dropdown formControlName="co_instructors" [placeholder]="'select co-instructors'" [data]="users" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+                    <ng-multiselect-dropdown formControlName="co_instructors" [placeholder]="'select co-instructors'" [data]="co_users" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label for="webinar-title">Courses</label><span class="text-danger">*</span>
+                <label for="webinar-title">Course</label>
                 <select class="form-control" formControlName="course_id">
-                  <<option value="">select course</option>
-                    <option *ngFor="let course of courses" value="{{ course.id }}">{{ course.name }}</option>
+                  <option value="">select course</option>
+                  <option *ngFor="let course of courses" value="{{ course.id }}">{{ course.name }}</option>
                 </select>
               </div>
               <div class="form-group">

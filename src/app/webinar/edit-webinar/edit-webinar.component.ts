@@ -19,6 +19,7 @@ export class EditWebinarComponent implements OnInit {
   webinar: Webinar;
   isDisabled = false;
   users = [];
+  co_users = [];
   id: number;
   courses = [];
   auth_user = JSON.parse(localStorage.getItem("auth_user"));
@@ -34,7 +35,7 @@ export class EditWebinarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getInstructors();
+    this.getInstructors(0);
     this.getCourses();
     this.editForm = this.formBuilder.group({
       id: ['', Validators.required],
@@ -66,8 +67,10 @@ export class EditWebinarComponent implements OnInit {
         this.editForm.controls['long_description'].setValue(webinar.long_description);
         this.editForm.controls['image'].setValue(webinar.image);
         this.editForm.setValue(webinar);
-
+        this.getCoInstructors(webinar.instructors);
       });
+
+
   }
   onItemSelect(item: any) {
     console.log(item);
@@ -75,15 +78,22 @@ export class EditWebinarComponent implements OnInit {
   onSelectAll(items: any) {
     console.log(items);
   }
+  onSelectChange(event) {
+    let not_user = event.target.value;
+    this.getCoInstructors(not_user);
+  }
   getCourses(): void {
     this.webinarService.getCourses()
       .subscribe(courses => this.courses = courses);
   }
-  getInstructors(): void {
-    this.webinarService.getInstructors()
+  getInstructors(not_user): void {
+    this.webinarService.getInstructors(not_user)
       .subscribe(users => this.users = users);
   }
-
+  getCoInstructors(not_user): void {
+    this.webinarService.getInstructors(not_user)
+      .subscribe(co_users => this.co_users = co_users);
+  }
   onSubmit() {
     let fi = this.fileInput.nativeElement;
     if (fi.files && fi.files[0]) {

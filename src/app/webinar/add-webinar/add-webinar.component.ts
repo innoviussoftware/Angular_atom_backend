@@ -19,6 +19,7 @@ export class AddWebinarComponent implements OnInit {
   webinar: Webinar;
   isDisabled = false;
   users = [];
+  co_users = [];
   courses = [];
   auth_user = JSON.parse(localStorage.getItem("auth_user"));
   instructor = (this.auth_user.role == 'instructor') ? this.auth_user.id : '';
@@ -29,7 +30,7 @@ export class AddWebinarComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private webinarService: WebinarService) { }
 
   ngOnInit() {
-    this.getInstructors();
+    this.getInstructors(0);
     this.getCourses();
     this.addForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -64,17 +65,25 @@ export class AddWebinarComponent implements OnInit {
     if (event.target.files.length > 0) {
       let file = event.target.files[0];
       this.addForm.get('image').setValue(file);
-      console.log(this.addForm.value);
     }
+  }
+  onSelectChange(event) {
+    let not_user = event.target.value;
+    this.getCoInstructors(not_user);
   }
   getCourses(): void {
     this.webinarService.getCourses()
       .subscribe(courses => this.courses = courses);
   }
 
-  getInstructors(): void {
-    this.webinarService.getInstructors()
+  getInstructors(not_user): void {
+    this.webinarService.getInstructors(not_user)
       .subscribe(users => this.users = users);
+  }
+
+  getCoInstructors(not_user): void {
+    this.webinarService.getInstructors(not_user)
+      .subscribe(co_users => this.co_users = co_users);
   }
 
   onSubmit() {
