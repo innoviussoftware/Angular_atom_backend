@@ -21,7 +21,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Id</th>
+              <th>Sr. No.</th>
               <th>Title</th>
               <th>Course</th>
               <th>Instructor</th>
@@ -30,8 +30,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let webinar of webinars">
-              <td>{{ webinar.id }}</td>
+            <tr *ngFor="let webinar of webinars; let i = index;">
+              <td>{{ i + 1 }}</td>
               <td>{{ webinar.title }}</td>
               <td>
                 <a routerLink='/courses/{{ (webinar.course) ? (webinar.course.course_data.id) ? webinar.course.course_data.id : "":"" }}'>
