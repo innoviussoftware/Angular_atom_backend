@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 
 import { AppConfig } from '../app-config';
 import { MessageService } from '../message.service';
+import { AuthService } from '../auth/auth.service';
 
 
 @Injectable({
@@ -18,8 +19,7 @@ export class DashboardService {
     headers: new HttpHeaders({ 'Accept': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('auth_token') })
   };
 
-
-  constructor(private http: HttpClient, private messageService: MessageService, private router: Router) { }
+  constructor(private http: HttpClient, private messageService: MessageService,  private authService: AuthService, private router: Router) { }
 
   // /** GET heroes from the server */
   // getCourses(): Observable<Course[]> {
@@ -94,6 +94,8 @@ export class DashboardService {
         this.messageService.showErrors(error.error);
       } else if(error.status == 403){
         this.router.navigate(['page-not-permitted'])
+      }if(error.status == 401){
+        this.authService.logout();
       } else {
         alert('Something went wrong');
       }

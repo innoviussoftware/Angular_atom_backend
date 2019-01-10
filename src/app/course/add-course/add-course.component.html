@@ -24,11 +24,11 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="exampleInputName1">Name</label><span class="text-danger">*</span>
+                <label for="exampleInputName1">Course Name</label><span class="text-danger">*</span>
                 <input type="text" class="form-control" formControlName="name">
               </div>
               <div class="form-group">
-                <label>Image</label>
+                <label>Image</label><span class="text-danger">*</span>
                 <input type="file" class="form-control" (change)="onFileChange($event)">
               </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="input-group mb-3">
                   <input type="number" [min]="0" [step]="0.5" class="form-control" formControlName="duration">
                   <div class="input-group-append">
-                    <select class="form-control input-addon-select" formControlName="duration_units">
+                    <select class="form-control input-addon-select" formControlName="duration_units"  style="padding: 0.8rem 1.375rem;height: 43px;">
                       <option value="days">Days</option>
                       <option [selected]="true" value="months">Months</option>
                       <option value="years">Years</option>
@@ -51,7 +51,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label>Short Description</label>
+                <label>Short Description</label><span class="text-danger">*</span>
                 <input type="text" class="form-control" formControlName="short_description">
               </div>
             </div>
@@ -78,7 +78,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail3">Overview</label>
+            <label for="exampleInputEmail3">Overview</label><span class="text-danger">*</span>
             <ck-editor formControlName="long_description" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
           </div>
           <div class="form-group">

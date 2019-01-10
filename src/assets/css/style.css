@@ -20949,3 +20949,6 @@ a, a:hover{
   color: #3578ad;
 }
 /*# sourceMappingURL=maps/style.css.map */
+select.form-control {
+    color: black;
+}

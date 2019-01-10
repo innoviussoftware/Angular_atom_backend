@@ -21,15 +21,13 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Id</th>
               <th>Name</th>
               <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let category of categories">
-              <td>{{ category.id }}</td>
+            <tr *ngFor="let category of categories; let i = index;">
               <td>{{ category.name }}</td>
               <td>{{ category.description }}</td>
               <td>
