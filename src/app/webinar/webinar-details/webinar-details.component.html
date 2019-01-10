@@ -1,0 +1,90 @@
+<div class="page-header">
+  <h3 class="page-title">
+    Webinar Details
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+      <li class="breadcrumb-item"><a routerLink="/webinars">Webinars</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Single Webinar</li>
+    </ol>
+  </nav>
+</div>
+<div class="row">
+  <div class="col grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+            <h2 class="section-title">{{webinar.title}}</h2>
+            <div class="text-muted mb-3 mt-3">
+              <i class="mdi mdi-account-circle text-primary"></i> Instructor: {{ webinar.user.name + ' ' + webinar.user.last_name }}
+              <small><i class="mdi mdi-checkbox-blank-circle text-muted"></i></small>&nbsp;
+              <i class="mdi mdi-clock text-primary"></i> {{ webinar.date_time }}
+            </div>
+            <h5 class="mb-3"><u>Course</u> <a routerLink='/courses/{{ (webinar.course) ? (webinar.course.course_data.id) ? webinar.course.course_data.id : "":"" }}'>
+                {{ (webinar.course) ? (webinar.course.course_data.name) ? webinar.course.course_data.name : "" : "" }}
+              </a>
+            </h5>
+
+            <h5 class="mb-3"><u>URL</u>
+              <a href="{{ webinar.url }}" target="_blank">
+                {{ webinar.url }}
+              </a>
+            </h5>
+
+            <h5><u>Co-Insructors</u></h5>
+            <ul class="list-group list-unstyled mb-3">
+              <li *ngFor="let co_instructor of webinar.co_instructors"><i class="mdi mdi-check"></i> {{ co_instructor.name }}</li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+            <div class="thumbnail" *ngIf="webinar.image">
+              <img src="{{ webinar.image }}" class="img-fluid mb-3 float-right" width="300" />
+            </div>
+          </div>
+        </div>
+
+        <h5><u>Short Description</u></h5>
+        <div class="text-muted" [innerHTML]="webinar.short_description"></div><br>
+        <h5><u>Long Description</u></h5>
+        <div class="text-muted" [innerHTML]="webinar.long_description"></div>
+        <!-- <p class="text-muted">{{}}</p> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="webinar.get_enrolled_users.length > 0;">
+  <div class="col grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="section-title">Enrolled Users <small>({{ webinar.get_enrolled_users.length }})</small></h2><br>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Contact No.</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of webinar.get_enrolled_users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name+' '+user.last_name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.contact_number }}</td>
+              <td>
+                <button type="button" class="btn btn-inverse-info btn-rounded btn-icon" routerLink="/users/{{ user.id }}">
+                  <i class="mdi mdi-eye"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

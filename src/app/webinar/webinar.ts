@@ -14,4 +14,5 @@ export class Webinar {
   created_at: string;
   updated_at: string;
   co_instructors: User[];
+  image: string;
 }

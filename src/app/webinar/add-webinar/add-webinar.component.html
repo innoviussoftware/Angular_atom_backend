@@ -14,23 +14,23 @@
   <div class="col grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <form class="forms-sample" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <form class="forms-sample" [formGroup]="addForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
           <div class="row">
             <div class="col-md-6 col-lg-6 col-xs-12">
               <div class="form-group">
                 <label for="webinar-title">Title</label><span class="text-danger">*</span>
                 <input type="text" class="form-control" formControlName="title" />
-                <input type="hidden" class="form-control" formControlName="user_id"/>
+                <input type="hidden" class="form-control" formControlName="user_id" />
               </div>
               <div class="form-group">
                 <label for="webinar-url">URL</label><span class="text-danger">*</span>
-                <input type="text" formControlName="url" class="form-control"/>
+                <input type="text" formControlName="url" class="form-control" />
               </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xs-12">
               <div class="form-group">
                 <label for="webinar-date">Date Time</label><span class="text-danger">*</span>
-                <input type="text" id="date_time" formControlName="date_time" class="form-control"/>
+                <input type="text" id="date_time" formControlName="date_time" class="form-control" />
               </div>
               <div class="form-group" *ngIf="auth_user.role == 'admin'">
                 <label for="webinar-title">Instructor</label><span class="text-danger">*</span>
@@ -43,15 +43,19 @@
               </div>
             </div>
             <div class="col-12">
-              <div class="form-group">
-                <label for="webinar-title">Co-Instructors</label><span class="text-danger">*</span>
-                <ng-multiselect-dropdown formControlName="co_instructors"
-                [placeholder]="'select co-instructors'"
-                [data]="users"
-                [(ngModel)]="selectedItems"
-                [settings]="dropdownSettings"
-                (onSelect)="onItemSelect($event)"
-                (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+              <div class="row">
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" class="form-control" (change)="onFileChange($event)">
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="webinar-title">Co-Instructors</label><span class="text-danger">*</span>
+                    <ng-multiselect-dropdown formControlName="co_instructors" [placeholder]="'select co-instructors'" [data]="users" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="webinar-title">Course</label>

@@ -41,6 +41,9 @@
               <td>{{ webinar.user.name +' '+ webinar.user.last_name }}</td>
               <td>{{ webinar.date_time }}</td>
               <td>
+                <button routerLink='/webinars/{{ webinar.id }}' type="button" class="btn btn-inverse-primary btn-rounded btn-icon">
+                  <i class="mdi mdi mdi-eye"></i>
+                </button>
                 <button routerLink='/webinars/edit/{{ webinar.id }}/details' type="button" class="btn btn-inverse-info btn-rounded btn-icon">
                   <i class="mdi mdi-table-edit"></i>
                 </button>

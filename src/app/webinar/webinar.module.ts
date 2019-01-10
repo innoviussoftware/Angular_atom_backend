@@ -7,9 +7,10 @@ import { WebinarsComponent } from './webinars/webinars.component';
 import { EditWebinarComponent } from './edit-webinar/edit-webinar.component';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { WebinarDetailsComponent } from './webinar-details/webinar-details.component';
 
 @NgModule({
-  declarations: [AddWebinarComponent, WebinarsComponent, EditWebinarComponent],
+  declarations: [AddWebinarComponent, WebinarsComponent, EditWebinarComponent, WebinarDetailsComponent],
   imports: [
     CommonModule,
     WebinarRoutingModule,

@@ -22,7 +22,7 @@ export class WebinarService {
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router) { }
 
   getWebinars(): Observable<Webinar[]> {
-    return this.http.get<Webinar[]>(AppConfig.API_ENDPOINT + 'admin/webinars',this.httpOptions)
+    return this.http.get<Webinar[]>(AppConfig.API_ENDPOINT + 'admin/webinars', this.httpOptions)
   }
 
   getInstructors(): Observable<User[]> {
@@ -51,6 +51,21 @@ export class WebinarService {
       );
   }
 
+  getSingleWebinar(id: number): Observable<Webinar> {
+    const url = AppConfig.API_ENDPOINT + 'webinars/get/details/' + id;
+    return this.http.get<Webinar>(url)
+      .pipe(
+        tap(_ => console.log('fetched single webinar')),
+        catchError(this.handleError<Webinar>('getWebinar id=${id}'))
+      );
+  }
+
+  file_upload(fileToUpload): Observable<any> {
+    return this.http.post<any>(AppConfig.API_ENDPOINT + 'webinars/image/upload', fileToUpload)
+      .pipe(
+        catchError(this.handleError<any>('File uploaded'))
+      )
+  }
   updateWebinar(webinar: Webinar, id): Observable<Webinar> {
     return this.http.put<Webinar>(AppConfig.API_ENDPOINT + 'webinars/' + id, webinar)
       .pipe(
