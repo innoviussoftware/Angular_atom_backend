@@ -1,4 +1,5 @@
 import { User } from '../user/user';
+import { Course } from '../course/course';
 
 export class Webinar {
   id: number;
@@ -15,4 +16,7 @@ export class Webinar {
   updated_at: string;
   co_instructors: User[];
   image: string;
+  get_enrolled_users: User[];
+  course: Course;
+  user: User;
 }

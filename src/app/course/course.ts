@@ -6,12 +6,12 @@ export class Course {
   id: number;
   name: string;
   price: string;
-  long_description:string;
-  short_description:string;
-  category_id:number;
-  duration:number;
-  duration_units:string;
-  language:string;
+  long_description: string;
+  short_description: string;
+  category_id: number;
+  duration: number;
+  duration_units: string;
+  language: string;
   image: string;
   status: string;
   is_enrollled: string;
@@ -21,4 +21,5 @@ export class Course {
   chapters: Chapter[];
   updated_at: string;
   created_at: string;
+  course_data: any;
 }
