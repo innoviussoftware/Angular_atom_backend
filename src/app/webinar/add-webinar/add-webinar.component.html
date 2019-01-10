@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-md-6 col-lg-6 col-xs-12">
                   <div class="form-group">
-                    <label for="webinar-title">Co-Instructors</label><span class="text-danger">*</span>
+                    <label for="webinar-title">Co-Instructors</label>
                     <ng-multiselect-dropdown formControlName="co_instructors" [placeholder]="'select co-instructors'" [data]="users" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"></ng-multiselect-dropdown>
                   </div>
                 </div>

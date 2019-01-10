@@ -96,6 +96,10 @@ export class EditWebinarComponent implements OnInit {
           this.webinarService.updateWebinar(this.editForm.value, this.id)
             .subscribe(webinar => this.webinar = webinar);
         });
+    } else {
+      this.editForm.controls['image'].setValue(null);
+      this.webinarService.updateWebinar(this.editForm.value, this.id)
+        .subscribe(webinar => this.webinar = webinar);
     }
   }
 
