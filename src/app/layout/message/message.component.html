@@ -1,4 +1,6 @@
-<div class="alert alert-success alert-dismissible fade show" *ngIf="messageService.message">
+
+<div class="message-content">
+  <div class="alert alert-success alert-dismissible fade show" *ngIf="messageService.message">
   <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
   <strong>Success!</strong> {{ messageService.message }}
 </div>
@@ -15,4 +17,5 @@
   <ul>
     <li *ngFor = 'let error of messageService.errors'>{{ error }}</li>
   </ul>
+</div>
 </div>
