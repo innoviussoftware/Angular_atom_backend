@@ -39,7 +39,7 @@
                   {{ (webinar.course) ? (webinar.course.course_data.name) ? webinar.course.course_data.name : "" : "" }}
                 </a>
               </td>
-              <td>{{ webinar.user.name +' '+ webinar.user.last_name }}</td>
+              <td>{{(webinar.user) ? webinar.user.name +' '+ webinar.user.last_name :'-' }}</td>
               <td>{{ webinar.date_time }}</td>
               <td>
                 <div [ngSwitch]="webinar.duration">
