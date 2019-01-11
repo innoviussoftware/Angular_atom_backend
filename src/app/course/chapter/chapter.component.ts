@@ -195,9 +195,9 @@ export class ChapterComponent implements OnInit {
                   ch.chapter_contents.push(chapter_content);
                 }
               });
+              $('#image_modal').modal('hide');
             })
             .add(() => {
-              $('#image_modal').modal('hide');
               $("#submit_image_button").prop('disabled', false);
               $("#submit_image_button").text('Submit');
             });
@@ -226,10 +226,10 @@ export class ChapterComponent implements OnInit {
             ch.chapter_contents.push(chapter_content);
           }
         });
+        $('#addChapterContentModal').modal('hide');
       })
       .add(() => {
         // Do some work after complete...
-        $('#addChapterContentModal').modal('hide');
         $("#add_chapter_content_btn").prop('disabled', false);
         $("#add_chapter_content_btn").text('Submit');
     });
@@ -247,12 +247,11 @@ export class ChapterComponent implements OnInit {
                 ch.chapter_contents[j] = chapter_content;
               }
             });
-
+            $('#editChapterContentModal').modal('hide');
           }
         });
       })
       .add(()=>{
-        $('#editChapterContentModal').modal('hide');
         $("#edit_chapter_content_btn").prop('disabled', false);
         $("#edit_chapter_content_btn").text('Submit');
       });
