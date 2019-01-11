@@ -97,7 +97,9 @@ export class WebinarService {
       console.error(error); // log to console instead
       if (error.status == 422) {
         this.messageService.showErrors(error.error);
-      } else {
+      } else if(error.status == 404){
+          this.router.navigate(['page-not-found']);
+      }else {
         alert('Something went wrong');
       }
 

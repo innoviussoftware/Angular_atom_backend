@@ -30,7 +30,7 @@
             <div class="col-md-6 col-lg-6 col-xs-12">
               <div class="form-group">
                 <label for="webinar-date">Date Time</label><span class="text-danger">*</span>
-                <input  [owlDateTime]="dt" [min]="today" [owlDateTimeTrigger]="dt" formControlName="date_time" class="form-control">
+                <input readonly  [owlDateTime]="dt" [min]="today" [owlDateTimeTrigger]="dt" formControlName="date_time" class="form-control">
                 <owl-date-time  #dt ></owl-date-time>
                 <!-- <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMin">
                     Date Time value must after {{startAt | date: 'medium'}}

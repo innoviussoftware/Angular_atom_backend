@@ -67,7 +67,6 @@ export class EditWebinarComponent implements OnInit {
         delete webinar.status;
         delete webinar.created_at;
         delete webinar.updated_at;
-        alert(new Date(webinar.date_time));
         this.editForm.setValue(webinar);
         this.editForm.controls['long_description'].setValue(webinar.long_description);
         this.editForm.controls['image'].setValue(webinar.image);
