@@ -44,6 +44,7 @@ export class EditWebinarComponent implements OnInit {
       id: ['', Validators.required],
       title: ['', Validators.required],
       date_time: ['', Validators.required],
+      duration: ['', Validators.required],
       url: ['', Validators.required],
       instructors: [this.instructor, Validators.required],
       short_description: ['', Validators.required],

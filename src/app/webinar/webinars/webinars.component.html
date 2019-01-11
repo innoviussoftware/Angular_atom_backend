@@ -26,6 +26,7 @@
               <th>Course</th>
               <th>Instructor</th>
               <th>Date Time</th>
+              <th>Duration</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -40,6 +41,17 @@
               </td>
               <td>{{ webinar.user.name +' '+ webinar.user.last_name }}</td>
               <td>{{ webinar.date_time }}</td>
+              <td>
+                <div [ngSwitch]="webinar.duration">
+                  <div *ngSwitchCase="30">30 minutes</div>
+                  <div *ngSwitchCase="60">1 hour</div>
+                  <div *ngSwitchCase="90">1.5 hours</div>
+                  <div *ngSwitchCase="120">2 hours</div>
+                  <div *ngSwitchCase="150">2.5 hours</div>
+                  <div *ngSwitchCase="180">3 hours</div>
+                  <div *ngSwitchDefault>-</div>
+                </div>
+              </td>
               <td>
                 <button routerLink='/webinars/{{ webinar.id }}' type="button" class="btn btn-inverse-primary btn-rounded btn-icon">
                   <i class="mdi mdi mdi-eye"></i>

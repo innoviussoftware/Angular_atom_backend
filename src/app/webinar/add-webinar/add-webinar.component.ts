@@ -37,6 +37,7 @@ export class AddWebinarComponent implements OnInit {
     this.addForm = this.formBuilder.group({
       title: ['', Validators.required],
       date_time: ['', Validators.required],
+      duration: ['', Validators.required],
       url: ['', Validators.required],
       instructors: [this.instructor, Validators.required],
       short_description: ['', Validators.required],
@@ -108,6 +109,7 @@ export class AddWebinarComponent implements OnInit {
       input.append('co_instructors[]', ids[i].id);
     }
     input.append('date_time', date_format);
+    input.append('duration', this.addForm.get('duration').value);
     input.append('url', this.addForm.get('url').value);
     input.append('course_id', this.addForm.get('course_id').value);
     input.append('user_id', this.addForm.get('user_id').value);

@@ -28,13 +28,30 @@
               </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xs-12">
-              <div class="form-group">
-                <label for="webinar-date">Date Time</label><span class="text-danger">*</span>
-                <input readonly  [owlDateTime]="dt" [min]="today" [owlDateTimeTrigger]="dt" formControlName="date_time" class="form-control">
-                <owl-date-time  #dt ></owl-date-time>
-                <!-- <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMin">
-                    Date Time value must after {{startAt | date: 'medium'}}
-                </div> -->
+              <div class="row">
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="webinar-date">Date Time</label><span class="text-danger">*</span>
+                    <input readonly [owlDateTime]="dt" [min]="today" [owlDateTimeTrigger]="dt" formControlName="date_time" class="form-control">
+                    <owl-date-time #dt></owl-date-time>
+                    <!-- <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMin">
+                      Date Time value must after {{startAt | date: 'medium'}}
+                    </div> -->
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                  <div class="form-group">
+                    <label for="webinar-title">Duration</label><span class="text-danger">*</span>
+                    <select class="form-control" formControlName="duration">
+                      <option value="30">30 minutes</option>
+                      <option value="60">60 minutes</option>
+                      <option value="90">1.5 hours</option>
+                      <option value="120">2 hours</option>
+                      <option value="150">2.5 hours</option>
+                      <option value="180">3 hours</option>
+                    </select>
+                  </div>
+                </div>
               </div>
               <div class="form-group" *ngIf="auth_user.role == 'admin'">
                 <label for="webinar-title">Instructor</label><span class="text-danger">*</span>

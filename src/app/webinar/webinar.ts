@@ -7,6 +7,7 @@ export class Webinar {
   instructors: User;
   url: string;
   date_time: string;
+  duration: number;
   short_description: string;
   long_description: string;
   user_id: number;
