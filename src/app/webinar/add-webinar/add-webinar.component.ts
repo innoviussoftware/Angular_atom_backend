@@ -26,10 +26,12 @@ export class AddWebinarComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
+  today: Date;
 
   constructor(private formBuilder: FormBuilder, private webinarService: WebinarService) { }
 
   ngOnInit() {
+    this.today = new Date();
     this.getInstructors(0);
     this.getCourses();
     this.addForm = this.formBuilder.group({
@@ -95,7 +97,9 @@ export class AddWebinarComponent implements OnInit {
 
   private prepareSave(): any {
     let input = new FormData();
-
+    let sdate = new Date(this.addForm.get('date_time').value);
+    let date_format:string = sdate.getFullYear()+"-"+(sdate.getMonth() + 1)+"-"+sdate.getDate()+" "+sdate.getHours()+":"+sdate.getMinutes()+":"+sdate.getSeconds();
+    alert(date_format);
     // This can be done a lot prettier; for example automatically assigning values by looping through `this.addForm.controls`, but we'll keep it as simple as possible here
     input.append('title', this.addForm.get('title').value);
     input.append('instructors', this.addForm.get('instructors').value);
@@ -103,7 +107,7 @@ export class AddWebinarComponent implements OnInit {
     for (var i = 0; i < ids.length; i++) {
       input.append('co_instructors[]', ids[i].id);
     }
-    input.append('date_time', this.addForm.get('date_time').value);
+    input.append('date_time', date_format);
     input.append('url', this.addForm.get('url').value);
     input.append('course_id', this.addForm.get('course_id').value);
     input.append('user_id', this.addForm.get('user_id').value);

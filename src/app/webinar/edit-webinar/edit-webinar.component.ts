@@ -28,10 +28,13 @@ export class EditWebinarComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   image_upload = new FormData();
+  today: Date;
+
   @ViewChild("fileInput") fileInput;
 
   constructor(private formBuilder: FormBuilder, private webinarService: WebinarService, private route: ActivatedRoute) {
     this.id = +this.route.snapshot.paramMap.get('id');
+    this.today = new Date();
   }
 
   ngOnInit() {
@@ -64,9 +67,11 @@ export class EditWebinarComponent implements OnInit {
         delete webinar.status;
         delete webinar.created_at;
         delete webinar.updated_at;
+        alert(new Date(webinar.date_time));
+        this.editForm.setValue(webinar);
         this.editForm.controls['long_description'].setValue(webinar.long_description);
         this.editForm.controls['image'].setValue(webinar.image);
-        this.editForm.setValue(webinar);
+        this.editForm.controls['date_time'].setValue(new Date(webinar.date_time));
         this.getCoInstructors(webinar.instructors);
       });
 
@@ -95,6 +100,10 @@ export class EditWebinarComponent implements OnInit {
       .subscribe(co_users => this.co_users = co_users);
   }
   onSubmit() {
+    let sdate = new Date(this.editForm.get('date_time').value);
+    let date_format:string = sdate.getFullYear()+"-"+(sdate.getMonth() + 1)+"-"+sdate.getDate()+" "+sdate.getHours()+":"+sdate.getMinutes()+":"+sdate.getSeconds();
+    this.editForm.controls['date_time'].setValue(date_format);
+
     let fi = this.fileInput.nativeElement;
     if (fi.files && fi.files[0]) {
       let fileToUpload = fi.files[0];

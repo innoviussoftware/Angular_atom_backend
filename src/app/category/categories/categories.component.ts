@@ -25,7 +25,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   delete(category: Category): void {
-    if (confirm('Deleting this category will also delete courses related to this category. are you sure you want to delete this ?')) {
+    if (confirm('Related courses of this category will be deleted if you will delete this category. Are you sure you want to delete this Category?')) {
       this.categories = this.categories.filter(c => c !== category);
       this.categoryService.deleteCategory(category).subscribe();
     }
