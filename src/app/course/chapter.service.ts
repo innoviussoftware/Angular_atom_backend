@@ -23,14 +23,14 @@ export class ChapterService {
   // }
 
 
-  // getCourse(id: number): Observable<Course> {
-  //   const url = AppConfig.API_ENDPOINT + 'courses/' + id;
-  //   return this.http.get<Course>(url)
-  //     .pipe(
-  //       tap(_ => console.log('fetched single course')),
-  //       catchError(this.handleError<Course>('getCourse id=${id}'))
-  //     );
-  // }
+  getChapter(id: number): Observable<Chapter> {
+    const url = AppConfig.API_ENDPOINT + 'chapters/' + id;
+    return this.http.get<Chapter>(url)
+      .pipe(
+        tap(_ => console.log('fetched single course')),
+        catchError(this.handleError<Chapter>('getCourse id=${id}'))
+      );
+  }
 
   store(chapter: Chapter): Observable<Chapter> {
     return this.http.post<Chapter>(AppConfig.API_ENDPOINT + 'chapters', chapter)

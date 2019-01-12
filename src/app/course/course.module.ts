@@ -12,6 +12,7 @@ import { CourseComponent } from './course/course.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
 import { ChapterComponent } from './chapter/chapter.component';
+import { QuestionComponent } from './question/question.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ChapterComponent } from './chapter/chapter.component';
     AddCourseComponent,
     EditCourseComponent,
     ChapterComponent,
+    QuestionComponent,
   ],
   imports: [
     CommonModule,

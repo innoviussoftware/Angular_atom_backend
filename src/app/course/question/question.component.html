@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h3 class="page-title">
+    Manage Questions
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Dashboard</a></li>
+      <li class="breadcrumb-item"><a routerLink="/courses">Courses</a></li>
+      <li class="breadcrumb-item"><a routerLink="/courses/edit/{{chapter_id}}/chapters">{{ chapter.title }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Manage questions</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="card mb-5" *ngFor="let question of questions; let i = index;">
+  <div class="card-header bg-white">
+    <form method="post" class="title_form">
+      <div class="form-group mb-0">
+        <div class="input-group">
+          <input type="text" class="form-control form-control-sm" placeholder="Enter Question" value="{{ question.question }}" (blur)="updateQuestion($event,question )">
+          <div class="input-group-append">
+            <button class="btn btn-danger btn-sm" type="button" (click)="deleteQuestion(question)"><i class="mdi mdi-delete-forever"></i></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-body py-3">
+    <small class="text-danger mb-2" *ngIf="question.answers.length < 2">Please provide at least two answres and one as correct check mark.</small>
+
+    <ol>
+      <li *ngFor="let answer of question.answers; let i = index; ">
+
+        <div class="form-group mb-1">
+          <div class="input-group">
+            <input type="text" class="form-control form-control-sm" value="{{ answer.answer }}" (blur)="onBlurAnswer($event, answer)">
+            <div class="input-group-append">
+              <div class="input-group-text py-0">
+                <input type="checkbox" [checked]="answer.is_correct" value="1" (change)="onChangeAnswer($event, answer)">
+              </div>
+              <button class="btn btn-danger btn-sm" type="button" (click)="deleteAnswer(answer,question)" ><i class="mdi mdi-delete-forever"></i></button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+    <button *ngIf="question.answers.length < 4" class="btn btn-gradient-success btn-sm" (click)="addAnswer(question);">+ Add Answer</button>
+    <br>
+  </div>
+</div>
+<div class="text-center">
+<button class="btn btn-gradient-success" (click)="addQuestion();">+ Add Questions</button>
+</div>
+
+<script src="../../js/file-upload.js"></script>
