@@ -42,7 +42,9 @@ export class QuestionComponent implements OnInit {
 
   updateQuestion(event: any, question: Question): void {
     question.question = event.target.value;
-    this.questionService.store(question).subscribe();
+    this.selected_question = question;
+    this.questionService.store(question)
+    .subscribe(question => this.selected_question.id = question.id);
 
   }
 
