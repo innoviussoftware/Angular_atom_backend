@@ -51,6 +51,16 @@ export class CourseService {
     )
   }
 
+  updateSettings(course: Course, id): Observable<Course>{
+    return this.http.post<Course>(AppConfig.API_ENDPOINT + 'courses/update/settings/' + id, course)
+    .pipe(
+      tap(_ => this.messageService.showMessage('Course updated successfully.')),
+      // tap(_ => this.router.navigate(['courses'])),
+      catchError(this.handleError<Course>('update COURSE'))
+    )
+  }
+
+
   /**
  * Handle Http operation that failed.
  * Let the app continue.

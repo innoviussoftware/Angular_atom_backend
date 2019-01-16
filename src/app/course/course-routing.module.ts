@@ -5,6 +5,7 @@ import { CourseComponent } from './course/course.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
 import { ChapterComponent } from './chapter/chapter.component';
+import { SettingsComponent } from './settings/settings.component';
 
 import { LayoutComponent } from '../layout/layout.component';
 
@@ -21,6 +22,7 @@ const COURSES_ROUTES: Routes = [
         {path : ':id', component : CourseComponent},
         {path : 'edit/:id/details', component : EditCourseComponent},
         {path : 'edit/:id/chapters', component : ChapterComponent},
+        {path : 'edit/:id/settings', component : SettingsComponent},
       ]
   }
 

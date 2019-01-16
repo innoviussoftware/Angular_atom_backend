@@ -14,7 +14,7 @@ export class Course {
   language: string;
   image: string;
   status: string;
-  is_enrollled: string;
+  is_enrolled: string;
   instructors: User[];
   users: User[];
   category: Category[];
@@ -22,4 +22,9 @@ export class Course {
   updated_at: string;
   created_at: string;
   course_data: any;
+  sequence_type: string;
+  all_chapters: string;
+  test_passed: string;
+  passing_score: string;
+  is_reappear: string;
 }

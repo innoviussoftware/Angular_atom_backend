@@ -23,7 +23,7 @@
               <th>Sr. No.</th>
               <th>Author</th>
               <th>Name</th>
-              <th>Price</th>
+              <th>Price (AED)</th>
               <th>Duration</th>
               <th>Status</th>
               <th>Action</th>
@@ -37,7 +37,7 @@
                 <img src="assets/images/faces-clipart/pic-1.png" alt="image">
               </td>
               <td>{{ course.name }}</td>
-              <td>AED {{ course.price }}</td>
+              <td>{{ course.price | number: '1.0' }}</td>
               <td>{{ course.duration + ' ' + course.duration_units }}</td>
               <td>
                 <label class='badge badge-success' *ngIf="course.status == '1'">Active</label>

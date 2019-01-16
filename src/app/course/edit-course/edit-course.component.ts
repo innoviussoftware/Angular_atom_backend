@@ -72,9 +72,9 @@ export class EditCourseComponent implements OnInit {
       .subscribe(categories => this.categories = categories);
 
     this.webinarService.getInstructors()
-       .subscribe(users => {
-         this.users = users;
-       });
+      .subscribe(users => {
+        this.users = users;
+      });
 
     this.courseService.getCourse(this.id)
       .subscribe(course => {
@@ -91,10 +91,10 @@ export class EditCourseComponent implements OnInit {
         this.editForm.controls['status'].setValue(course.status);
         this.editForm.controls['co_instructors'].setValue(course.instructors);
 
-        for(var i = 0; i < course.instructors.length; i++){
-            if (course.instructors[i].pivot.is_primary == 1) {
-              this.editForm.controls['primary_instructor_id'].setValue(course.instructors[i].id);
-            }
+        for (var i = 0; i < course.instructors.length; i++) {
+          if (course.instructors[i].pivot.is_primary == 1) {
+            this.editForm.controls['primary_instructor_id'].setValue(course.instructors[i].id);
+          }
         }
       });
   }
