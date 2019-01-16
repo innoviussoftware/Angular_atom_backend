@@ -13,6 +13,7 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { SettingsComponent } from './settings/settings.component';
+import { QuestionComponent } from './question/question.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { SettingsComponent } from './settings/settings.component';
     EditCourseComponent,
     ChapterComponent,
     SettingsComponent,
+    QuestionComponent,
   ],
   imports: [
     CommonModule,

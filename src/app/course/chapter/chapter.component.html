@@ -36,9 +36,17 @@
     <form method="post" class="title_form">
       <div class="input-group">
         <input type="text" class="form-control" value="{{ chapter.title }}" (blur)="updateTitle($event,chapter )">
-        <div class="input-group-append">
-          <button class="btn btn-danger px-3" type="button" (click)="onClickdelete(chapter)"><i class="mdi mdi-delete-forever"></i></button>
+        <div class="input-group-prepend">
+          <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="javascript:void(0);" routerLink="/courses/edit/{{ chapter.id }}/questions">Manage Questions</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="javascript:void(0);" (click)="onClickdelete(chapter)"><i class="mdi mdi-delete-forever"></i> Delete</a>
+          </div>
         </div>
+        <!-- <div class="input-group-append">
+          <button class="btn btn-danger px-3" type="button" (click)="onClickdelete(chapter)"><i class="mdi mdi-delete-forever"></i></button>
+        </div> -->
       </div>
     </form>
   </div>
