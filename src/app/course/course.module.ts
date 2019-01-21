@@ -14,6 +14,7 @@ import { EditCourseComponent } from './edit-course/edit-course.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { SettingsComponent } from './settings/settings.component';
 import { QuestionComponent } from './question/question.component';
+import { ExamComponent } from './exam/exam.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { QuestionComponent } from './question/question.component';
     ChapterComponent,
     SettingsComponent,
     QuestionComponent,
+    ExamComponent,
   ],
   imports: [
     CommonModule,

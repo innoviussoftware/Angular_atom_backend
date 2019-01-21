@@ -7,10 +7,9 @@ import { EditCourseComponent } from './edit-course/edit-course.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { SettingsComponent } from './settings/settings.component';
 import { QuestionComponent } from './question/question.component';
-
+import { ExamComponent } from './exam/exam.component';
 
 import { LayoutComponent } from '../layout/layout.component';
-
 import { CheckAuth } from '../auth/check-auth.guard';
 
 const COURSES_ROUTES: Routes = [
@@ -25,6 +24,7 @@ const COURSES_ROUTES: Routes = [
         {path : 'edit/:id/details', component : EditCourseComponent},
         {path : 'edit/:id/chapters', component : ChapterComponent},
         {path : 'edit/:id/settings', component : SettingsComponent},
+        {path : 'edit/:id/exam', component : ExamComponent},
         {path : 'edit/:chapter_id/questions', component : QuestionComponent},
       ]
   }
