@@ -77,7 +77,7 @@ export class ExamComponent implements OnInit {
 
   deleteQuestion(course_question: CourseQuestion): void {
     if (confirm('Are you sure you want to delete this question?')) {
-      this.cousreQuestionService.delete(course_question.id).subscribe();
+      this.courseQuestionService.delete(course_question.id).subscribe();
       this.course_questions = this.course_questions.filter(q => q !== course_question);
     }
   }
