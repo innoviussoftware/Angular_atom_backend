@@ -60,6 +60,13 @@ export class CourseService {
     )
   }
 
+  updateFeatured(id,featured): Observable<Course>{
+    return this.http.get<Course>(AppConfig.API_ENDPOINT + 'courses/make/featured/'+id+'/'+featured)
+    .pipe(
+      catchError(this.handleError<Course>('update COURSE'))
+    )
+  }
+
 
   /**
  * Handle Http operation that failed.

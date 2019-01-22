@@ -6,6 +6,7 @@ import { PageNotPermittedComponent } from './layout/page-not-permitted/page-not-
 import { FormComponent } from './form/form.component';
 import { LayoutComponent } from './layout/layout.component';
 import { CheckAuth } from './auth/check-auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'form', component: FormComponent },
+      { path: 'profile', component: ProfileComponent },
     ]
   },
   { path: 'page-not-found', component: PageNotFoundComponent },

@@ -27,4 +27,5 @@ export class Course {
   test_passed: string;
   passing_score: string;
   is_reappear: string;
+  is_featured: number;
 }

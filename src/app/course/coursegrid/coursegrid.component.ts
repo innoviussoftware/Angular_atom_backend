@@ -20,4 +20,11 @@ export class CoursegridComponent implements OnInit {
       .subscribe(courses => this.courses = courses);
   }
 
+  updateFeatured(featured,course_id){      
+      this.courseService.updateFeatured(course_id,featured)
+        .subscribe(courses => {
+            this.getCourses();
+        });
+  }
+
 }

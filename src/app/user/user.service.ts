@@ -53,6 +53,21 @@ export class UserService {
       catchError(this.handleError<User>('update Chapter'))
     )
   }
+
+  updateFeatured(id,featured): Observable<User>{    
+    return this.http.get<User>(AppConfig.API_ENDPOINT + 'users/make/featured/'+id+'/'+featured)
+    .pipe(
+      catchError(this.handleError<User>('update USER'))
+    )
+  }
+
+  file_upload(fileToUpload): Observable<any> {
+    return this.http.post<any>(AppConfig.API_ENDPOINT + 'users/image/upload', fileToUpload)
+      .pipe(
+        catchError(this.handleError<any>('File uploaded'))
+      )
+  }
+
   /**
  * Handle Http operation that failed.
  * Let the app continue.

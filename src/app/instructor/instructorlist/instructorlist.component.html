@@ -22,6 +22,7 @@
               <th>Full Name</th>
               <th>Email</th>
               <th>Contact No.</th>
+              <th class="text-center">Featured</th>
               <th>Action</th>
               <th></th>
             </tr>
@@ -31,7 +32,15 @@
               <td>{{ i + 1 }}</td>
               <td>{{ user.name+' '+user.last_name }}</td>
               <td>{{ user.email }}</td>
-              <td>{{ user.contact_number }}</td>
+              <td>{{ user.contact_number }}</td> 
+              <td class="text-center">
+                <a href="javascript:void(0);" class="text-warning"  *ngIf="user.is_featured == 0" (click)="updateFeatured(1, user.id)" data-toggle="tooltip" data-title="Remove from featured">
+                  <i class="mdi mdi-star-outline" style="font-size: 2em"></i>
+                </a>
+                <a href="javascript:void(0);" class="text-warning"  *ngIf="user.is_featured == 1" (click)="updateFeatured(0,user.id)" data-toggle="tooltip" data-title="Mark as featured">
+                  <i class="mdi mdi-star" style="font-size: 2em"></i>
+                </a>
+              </td>
               <td>
                 <button type="button" class="btn btn-inverse-info btn-rounded btn-icon" routerLink="/instructors/{{ user.id }}">
                   <i class="mdi mdi-eye"></i>

@@ -26,8 +26,8 @@
               <th>Price (AED)</th>
               <th>Duration</th>
               <th>Status</th>
+              <th>Featured</th>
               <th>Action</th>
-              <!-- <th>Progress</th> -->
             </tr>
           </thead>
           <tbody>
@@ -43,7 +43,16 @@
                 <label class='badge badge-success' *ngIf="course.status == '1'">Active</label>
                 <label class='badge badge-danger' *ngIf="course.status == '0'">Inactive</label>
               </td>
+              <td class="text-center">
+                <a href="javascript:void(0);" class="text-warning"  *ngIf="course.is_featured == 0" (click)="updateFeatured(1, course.id)" data-toggle="tooltip" data-title="Remove from featured">
+                  <i class="mdi mdi-star-outline" style="font-size: 2em"></i>
+                </a>
+                <a href="javascript:void(0);" class="text-warning"  *ngIf="course.is_featured == 1" (click)="updateFeatured(0,course.id)" data-toggle="tooltip" data-title="Mark as featured">
+                  <i class="mdi mdi-star" style="font-size: 2em"></i>
+                </a>
+              </td>
               <td>
+
                 <button routerLink='/courses/{{ course.id }}' type="button" class="btn btn-inverse-primary btn-rounded btn-icon">
                   <i class="mdi mdi mdi-eye"></i>
                 </button>
@@ -63,3 +72,8 @@
     </div>
   </div>
 </div>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>

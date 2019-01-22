@@ -41,4 +41,11 @@ export class InstructorlistComponent implements OnInit {
     this.userService.update(user, user.id).subscribe();
   }
 
+  updateFeatured(featured,user_id){         
+    this.userService.updateFeatured(user_id,featured)
+      .subscribe(users => {
+          this.getUserlist();
+      });
+  }
+
 }

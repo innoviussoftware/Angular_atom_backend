@@ -22,4 +22,5 @@ export class User {
   is_approved:number;
   pivot:any;
   webinars:Webinar[];
+  is_featured: number;
 }
