@@ -28,5 +28,5 @@ export class Course {
   passing_score: string;
   is_reappear: string;
   is_featured: number;
-  exam_duration: string;
+  exam_duration:number;
 }
