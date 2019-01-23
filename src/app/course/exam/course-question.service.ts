@@ -19,11 +19,11 @@ export class CourseQuestionService {
   constructor(private http: HttpClient, private messageService: MessageService, private router: Router) { }
 
   /** GET heroes from the server */
-  getCourseQuestions(course_id:number): Observable<CourseQuestion[]> {
-    return this.http.get<CourseQuestion[]>(AppConfig.API_ENDPOINT + 'course_questions/' + course_id, this.httpOptions)
+  getCourseQuestions(course_id:number): Observable<any> {
+    return this.http.get<any>(AppConfig.API_ENDPOINT + 'course_questions/' + course_id, this.httpOptions)
     .pipe(
         tap(_ => this.messageService.showMessage('Question updated successfully.')),
-        catchError(this.handleError<CourseQuestion[]>('store Chapter}'))
+        catchError(this.handleError<any>('store Chapter}'))
       );
   }
 
