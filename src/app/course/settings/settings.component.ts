@@ -41,7 +41,7 @@ export class SettingsComponent implements OnInit {
         course.test_passed = String(course.test_passed);
         course.passing_score = String(course.passing_score);
         course.is_reappear = String(course.is_reappear);
-        course.exam_duration = String(course.exam_duration);
+        course.exam_duration = course.exam_duration;
 
         this.editForm.controls['id'].setValue(course.id);
         this.editForm.controls['sequence_type'].setValue(course.sequence_type);

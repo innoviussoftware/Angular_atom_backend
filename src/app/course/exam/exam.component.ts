@@ -32,7 +32,7 @@ export class ExamComponent implements OnInit {
   ngOnInit() {
     this.courseQuestionService.getCourseQuestions(this.id)
       .subscribe(course_questions => {
-        this.course_questions = course_questions;
+        this.course_questions = course_questions.questions;
         console.log(course_questions);
       });
   }
