@@ -30,7 +30,8 @@ export class SettingsComponent implements OnInit {
       all_chapters: ['1', Validators.required],
       test_passed: ['1', Validators.required],
       passing_score: ['0', Validators.required],
-      is_reappear: ['1', Validators.required]
+      is_reappear: ['1', Validators.required],
+      exam_duration: ['', Validators.required]
     });
 
     this.courseService.getCourse(this.id)
@@ -40,6 +41,7 @@ export class SettingsComponent implements OnInit {
         course.test_passed = String(course.test_passed);
         course.passing_score = String(course.passing_score);
         course.is_reappear = String(course.is_reappear);
+        course.exam_duration = String(course.exam_duration);
 
         this.editForm.controls['id'].setValue(course.id);
         this.editForm.controls['sequence_type'].setValue(course.sequence_type);
@@ -47,6 +49,7 @@ export class SettingsComponent implements OnInit {
         this.editForm.controls['test_passed'].setValue(course.test_passed);
         this.editForm.controls['passing_score'].setValue(0);
         this.editForm.controls['is_reappear'].setValue(course.is_reappear);
+        this.editForm.controls['exam_duration'].setValue(course.exam_duration);
         if (course.test_passed == '1') {
           this.editForm.controls['passing_score'].setValue(course.passing_score);
           $('#passing_score').show();

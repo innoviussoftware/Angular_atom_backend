@@ -121,6 +121,22 @@
                 </div>
               </div>
 
+              <hr>
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                  <div class="form-group">
+                    <label>Exam Duration</label><span class="text-danger">*</span>
+                    <div class="input-group">
+                      <input type="number" [min]="1" class="form-control" formControlName="exam_duration">
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="mdi mdi-av-timer"> </i> Minutes</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
               <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
               <a class="btn btn-light" routerLink='/courses'>Cancel</a>
             </div>
