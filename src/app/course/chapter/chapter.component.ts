@@ -23,9 +23,11 @@ export class ChapterComponent implements OnInit {
   addChapterContentForm: FormGroup;
   contentVideoForm: FormGroup;
   contentImageForm: FormGroup;
+  contentDocumentForm: FormGroup;
   editChapterContentForm: FormGroup;
   image_upload = new FormData();
   @ViewChild("fileInput") fileInput;
+  @ViewChild("fileInput1") fileInput1;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,6 +68,15 @@ export class ChapterComponent implements OnInit {
     });
 
     this.contentImageForm = this.formBuilder.group({
+      id: ['', Validators.required],
+      title: ['', Validators.required],
+      type: ['', Validators.required],
+      chapter_id: ['', Validators.required],
+      content: ['', Validators.required],
+      priority: ['', Validators.required],
+    });
+
+    this.contentDocumentForm = this.formBuilder.group({
       id: ['', Validators.required],
       title: ['', Validators.required],
       type: ['', Validators.required],
@@ -142,6 +153,18 @@ export class ChapterComponent implements OnInit {
     $('#image_modal').modal('show');
   }
 
+  openDocumentModal(chapter_id: number, content: ChapterContent) {
+    this.contentDocumentForm.controls['id'].setValue(content ? content.id : 0);
+    this.contentDocumentForm.controls['title'].setValue(content ? content.title : '');
+    this.contentDocumentForm.controls['chapter_id'].setValue(chapter_id);
+    this.contentDocumentForm.controls['type'].setValue('document');
+    this.contentDocumentForm.controls['priority'].setValue(content ? content.priority : 0);
+    this.contentDocumentForm.controls['content'].setValue(content ? content.content : '');
+    this.image_upload.delete('image');
+    this.fileInput1.nativeElement.value = "";
+    $('#document_modal').modal('show');
+  }
+
   submitVideoContent() {
     $("#submit_video_button").prop('disabled', true);
     $("#submit_video_button").text('Wait');
@@ -207,6 +230,36 @@ export class ChapterComponent implements OnInit {
     }
   }
 
+  submitDocumentContent() {
+      let fi = this.fileInput1.nativeElement;
+      if (fi.files && fi.files[0]) {
+        $("#submit_document_button").prop('disabled', true);
+        $("#submit_document_button").text('Wait');
+          let fileToUpload = fi.files[0];
+          let input = new FormData();
+          input.append("document", fileToUpload);
+          this.chapterService.file_upload(input)
+          .subscribe(file_upload => {
+
+            this.contentDocumentForm.controls['content'].setValue(file_upload.path);
+            this.chapterService.storeContent(this.contentDocumentForm.value)
+              .subscribe(chapter_content => {
+                this.chapters.map((ch, i) => {
+                  if (ch.id == chapter_content.chapter_id) {
+                    ch.chapter_contents.push(chapter_content);
+                  }
+                });
+                $('#document_modal').modal('hide');
+              })
+              .add(() => {
+                $("#submit_document_button").prop('disabled', false);
+                $("#submit_document_button").text('Submit');
+              });
+          });
+      }else{
+        alert("Please select an document to upload.");
+      }
+    }
   openEditChapterContentModal(content: ChapterContent): void {
     this.editChapterContentForm.controls['id'].setValue(content.id);
     this.editChapterContentForm.controls['title'].setValue(content.title);

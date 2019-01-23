@@ -22,9 +22,11 @@ export class EditCourseComponent implements OnInit {
   editForm: FormGroup;
   id: number;
   users: User[];
+  co_users: User[];
   dropdownSettings = {};
   dropdownList = [];
   selectedItems = [];
+  primary_instructor_id;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,6 +42,7 @@ export class EditCourseComponent implements OnInit {
   ngOnInit() {
     //checkbox and radios
     $(".form-check label,.form-radio label").append('<i class="input-helper"></i>');
+    this.getInstructors(0);
 
     this.editForm = this.formBuilder.group({
       id: ['', Validators.required],
@@ -71,10 +74,7 @@ export class EditCourseComponent implements OnInit {
     this.categoryService.getCategories()
       .subscribe(categories => this.categories = categories);
 
-    this.webinarService.getInstructors()
-      .subscribe(users => {
-        this.users = users;
-      });
+   
 
     this.courseService.getCourse(this.id)
       .subscribe(course => {
@@ -89,25 +89,44 @@ export class EditCourseComponent implements OnInit {
         this.editForm.controls['short_description'].setValue(course.short_description);
         this.editForm.controls['image'].setValue(course.image);
         this.editForm.controls['status'].setValue(course.status);
-        this.editForm.controls['co_instructors'].setValue(course.instructors);
 
+        let co_users_selected = [];
         for (var i = 0; i < course.instructors.length; i++) {
           if (course.instructors[i].pivot.is_primary == 1) {
+            this.primary_instructor_id = course.instructors[i].id;
             this.editForm.controls['primary_instructor_id'].setValue(course.instructors[i].id);
+          }else{
+            co_users_selected.push(course.instructors[i]);
           }
         }
+        this.editForm.controls['co_instructors'].setValue(co_users_selected);
+
+        this.getCoInstructors(this.primary_instructor_id);
+
       });
   }
+
   onItemSelect(item: any) {
     console.log(item);
   }
   onSelectAll(items: any) {
     console.log(items);
   }
+  onSelectChange(event) {
+    let not_user = event.target.value;
+    this.getCoInstructors(not_user);
+  }
+  getInstructors(not_user): void {
+    this.webinarService.getInstructors(not_user)
+      .subscribe(users => this.users = users);
+  }
+  getCoInstructors(not_user): void {
+    this.webinarService.getInstructors(not_user)
+      .subscribe(co_users => this.co_users = co_users);
+  }
   onSubmit() {
     this.courseService.updateCourse(this.editForm.value, this.id)
       .subscribe(course => this.course = course);
-
   }
 
   onFileChange(event) {

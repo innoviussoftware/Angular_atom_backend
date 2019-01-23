@@ -69,6 +69,7 @@
                   <div class="input-group-append">
                     <select class="form-control input-addon-select" formControlName="duration_units">
                       <option value="days">Days</option>
+                      <option value="weeks">Weeks</option>
                       <option value="months">Months</option>
                       <option value="years">Years</option>
                     </select>
@@ -91,17 +92,17 @@
             <div class="col-sm-6">
             <div class="form-group">
               <label for="webinar-title">Instructors</label><span class="text-danger">*</span>
-              <select class="form-control" formControlName="primary_instructor_id">
+              <select class="form-control" formControlName="primary_instructor_id" (change)="onSelectChange($event)">
                 <option *ngFor="let instructor of users" value="{{ instructor.id }}">{{ instructor.name }}</option>
               </select>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="webinar-title">Co-Instructors</label><span class="text-danger">*</span>
+              <label for="webinar-title">Co-Instructors</label>
               <ng-multiselect-dropdown formControlName="co_instructors"
               [placeholder]="'select co-instructors'"
-              [data]="users"
+              [data]="co_users"
               [(ngModel)]="selectedItems"
               [settings]="dropdownSettings"
               (onSelect)="onItemSelect($event)"

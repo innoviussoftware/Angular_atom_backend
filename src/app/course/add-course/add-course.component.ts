@@ -20,7 +20,8 @@ export class AddCourseComponent implements OnInit {
   course: Course;
   categories: any[];
   addForm: FormGroup;
-  users:User[];
+  users: User[];
+  co_users: User[];
   auth_user = JSON.parse(localStorage.getItem("auth_user"));
   dropdownSettings = {};
   dropdownList = [];
@@ -41,9 +42,8 @@ export class AddCourseComponent implements OnInit {
     $(".form-check label,.form-radio label").append('<i class="input-helper"></i>');
     this.categoryService.getCategories()
       .subscribe(categories => this.categories = categories);
-
-    this.webinarService.getInstructors()
-         .subscribe(users => this.users = users);
+    
+    this.getInstructors(0);  
 
     this.addForm = this.formBuilder.group({
       primary_instructor_id: ['', Validators.required],
@@ -56,7 +56,7 @@ export class AddCourseComponent implements OnInit {
       long_description: ['', Validators.required],
       short_description: ['', Validators.required],
       image: [null, Validators.required],
-      status: ['0', Validators.required],
+      status: ['1', Validators.required],
     });
 
     this.dropdownSettings = {
@@ -68,6 +68,20 @@ export class AddCourseComponent implements OnInit {
       allowSearchFilter: true
     };
 
+  }
+  onSelectChange(event) {
+    let not_user = event.target.value;
+    this.getCoInstructors(not_user);
+  }
+
+  getInstructors(not_user): void {
+    this.webinarService.getInstructors(not_user)
+      .subscribe(users => this.users = users);
+  }
+
+  getCoInstructors(not_user): void {
+    this.webinarService.getInstructors(not_user)
+      .subscribe(co_users => this.co_users = co_users);
   }
 
   onSubmit() {

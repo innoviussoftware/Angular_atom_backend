@@ -57,7 +57,7 @@
     <ul class="list-group">
       <li class="list-group-item list-group-item-secondary" *ngFor="let content of chapter.chapter_contents">
         {{ content.type | uppercase }} : <b class="text-dark">{{ content.title }}</b>
-        <span *ngIf="content.type !== 'image'">
+        <span *ngIf="content.type !== 'image' && content.type !== 'document' ">
         <button *ngIf="content.type == 'html';else elseBlock" type="button" class="btn btn-inverse-info btn-rounded btn-icon float-right" (click)="openEditChapterContentModal(content)">
           <i class="mdi mdi-table-edit"></i>
         </button>
@@ -84,6 +84,7 @@
           <a class="dropdown-item" href="javascript:void(0);" (click)="openChapterContentModal(chapter.id)" >Content</a>
           <a class="dropdown-item" href="javascript:void(0);" (click)="openVideoModal(chapter.id)">Video</a>
           <a class="dropdown-item" href="javascript:void(0);" (click)="openImageModal(chapter.id)">Image</a>
+          <a class="dropdown-item" href="javascript:void(0);" (click)="openDocumentModal(chapter.id)">Word, Excel, or PowerPoint document</a>
         </div>
       </div>
     </div>
@@ -227,6 +228,42 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary" id="submit_image_button">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!--Document Modal-->
+<div class="modal fade" id="document_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form class="forms-sample" [formGroup]="contentDocumentForm" (ngSubmit)="submitDocumentContent();" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Word, Excel, or PowerPoint document</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+
+              <div class="form-group">
+                <label>Title</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" formControlName="title" />
+              </div>
+              <div class="form-group">
+                <label>Word, Excel, or PowerPoint document</label><span class="text-danger">*</span>
+                <input type="file" accept=".doc,.docx,.pdf,.ppt,.pptx" class="form-control" #fileInput1 />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="submit_document_button">Submit</button>
         </div>
       </form>
     </div>
