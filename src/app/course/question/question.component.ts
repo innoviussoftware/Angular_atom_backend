@@ -41,16 +41,21 @@ export class QuestionComponent implements OnInit {
   }
 
   updateQuestion(event: any, question: Question): void {
-    question.question = event.target.value;
-    this.selected_question = question;
-    this.questionService.store(question)
-    .subscribe(question => this.selected_question.id = question.id);
+    if (question.question !== event.target.value) {
+
+      question.question = event.target.value;
+      this.selected_question = question;
+      this.questionService.store(question)
+        .subscribe(question => this.selected_question.id = question.id);
+    }
 
   }
 
   onBlurAnswer(event: any, answer: Answer): void {
-    answer.answer = event.target.value;
-    this.storeAnswer(answer);
+    if (answer.answer !== event.target.value) {
+      answer.answer = event.target.value;
+      this.storeAnswer(answer);
+    }
   }
 
   onChangeAnswer(event: any, answer: Answer): void {
@@ -58,19 +63,22 @@ export class QuestionComponent implements OnInit {
     this.storeAnswer(answer);
   }
 
-  storeAnswer(answer:Answer){
+  storeAnswer(answer: Answer) {
     this.selected_answer = answer;
     this.answerService.store(answer).subscribe(answer => this.selected_answer.id = answer.id);
   }
 
-  addQuestion(){
+  addQuestion() {
     let new_question = new Question();
     new_question.chapter_id = this.chapter_id;
     new_question.answers = [];
     this.questions.push(new_question);
   }
 
-  addAnswer(question:Question){
+  addAnswer(question: Question) {
+    if(!question.id){
+      return false;
+    }
     let new_ans = new Answer();
     new_ans.question_id = question.id;
     this.selected_question = question;
@@ -84,7 +92,7 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  deleteAnswer(answer: Answer, question:Question): void {
+  deleteAnswer(answer: Answer, question: Question): void {
     if (confirm('Are you sure you want to delete this answer?')) {
       this.selected_question = question;
       this.answerService.delete(answer.id).subscribe();

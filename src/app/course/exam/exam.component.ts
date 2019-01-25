@@ -39,16 +39,21 @@ export class ExamComponent implements OnInit {
 
 
   updateQuestion(event: any, course_question: CourseQuestion): void {
-    course_question.question = event.target.value;
-    this.selected_course_question = course_question;
-    this.courseQuestionService.store(course_question)
+    if(course_question.question !== event.target.value){
+      course_question.question = event.target.value;
+      this.selected_course_question = course_question;
+      this.courseQuestionService.store(course_question)
       .subscribe(course_question => this.selected_course_question.id = course_question.id);
+    }
 
   }
 
   onBlurAnswer(event: any, course_answer: CourseAnswer): void {
-    course_answer.answer = event.target.value;
-    this.storeAnswer(course_answer);
+    if (course_answer.answer !== event.target.value) {
+
+      course_answer.answer = event.target.value;
+      this.storeAnswer(course_answer);
+    }
   }
 
   onChangeAnswer(event: any, course_answer: CourseAnswer): void {
@@ -69,6 +74,9 @@ export class ExamComponent implements OnInit {
   }
 
   addAnswer(course_question: CourseQuestion) {
+    if(!course_question.id){
+      return false;
+    }
     let new_ans = new CourseAnswer();
     new_ans.course_question_id = course_question.id;
     this.selected_course_question = course_question;
@@ -82,7 +90,7 @@ export class ExamComponent implements OnInit {
     }
   }
 
-  deleteAnswer(course_answer: CourseAnswer, course_question:CourseQuestion): void {
+  deleteAnswer(course_answer: CourseAnswer, course_question: CourseQuestion): void {
     if (confirm('Are you sure you want to delete this answer?')) {
       this.selected_course_question = course_question;
       this.courseAnswerService.delete(course_answer.id).subscribe();

@@ -26,7 +26,7 @@ export class UserlistComponent implements OnInit {
   }
 
   delete(user: User) {
-    if (confirm('are you sure you want to delete this user?')) {
+    if (confirm('Are you sure you want to delete this user?')) {
       this.userService.delete(user).subscribe();
       this.users = this.users.filter(u => u !== user);
     }

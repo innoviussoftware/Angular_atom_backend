@@ -68,7 +68,7 @@
         </div>
       </li>
     </ol>
-    <button *ngIf="question.course_answers.length < 4" class="btn btn-gradient-success btn-sm" (click)="addAnswer(question);">+ Add Answer</button>
+    <button *ngIf="question.course_answers.length < 4" class="btn btn-gradient-success btn-sm {{ (question.id) ? '' : 'disabled' }}" (click)="addAnswer(question);">+ Add Answer</button>
     <br>
   </div>
 </div>
