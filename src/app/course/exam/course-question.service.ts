@@ -20,7 +20,7 @@ export class CourseQuestionService {
 
   /** GET heroes from the server */
   getCourseQuestions(course_id:number): Observable<any> {
-    return this.http.get<any>(AppConfig.API_ENDPOINT + 'course_questions/' + course_id, this.httpOptions)
+    return this.http.get<any>(AppConfig.API_ENDPOINT + 'course_questions/get_list/' + course_id, this.httpOptions)
     .pipe(
         tap(_ => this.messageService.showMessage('Question updated successfully.')),
         catchError(this.handleError<any>('store Chapter}'))
