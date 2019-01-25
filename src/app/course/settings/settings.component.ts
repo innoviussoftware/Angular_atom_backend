@@ -68,7 +68,7 @@ export class SettingsComponent implements OnInit {
       $('#passing_score').show();
     } else {
       $('#passing_score').hide();
-      this.editForm.controls['passing_score'].setValue(0);
+      // this.editForm.controls['passing_score'].setValue(0);
     }
 
   }
