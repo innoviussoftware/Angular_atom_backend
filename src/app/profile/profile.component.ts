@@ -21,6 +21,7 @@ profileForm: FormGroup;
   constructor(private authService: AuthService,private formBuilder: FormBuilder,private userService: UserService) {  }
 
   ngOnInit() {
+
 	  this.profileForm = this.formBuilder.group({	      
 	      name: [this.auth_user.name, Validators.required],
 	      last_name: [this.auth_user.last_name, Validators.required],
@@ -47,22 +48,15 @@ profileForm: FormGroup;
           this.profileForm.controls['image'].setValue(file_upload.path);
           this.userService.update(this.profileForm.value, this.id)
             .subscribe(user => {
-            this.auth_user = user;
-        	let auth_user_data = JSON.parse(localStorage.getItem("auth_user"));
-			auth_user_data = user;
-        	localStorage.setItem("auth_user", JSON.stringify(auth_user_data));
+        	     localStorage.setItem("auth_user", JSON.stringify(user));
             });
-
         });
     } else {
       this.profileForm.controls['image'].setValue(null);
       this.userService.update(this.profileForm.value, this.id)
         .subscribe(user => {
-            this.auth_user = user;
-            let auth_user_data = JSON.parse(localStorage.getItem("auth_user"));
-			auth_user_data = user;
-        	localStorage.setItem("auth_user", JSON.stringify(auth_user_data));
-            });
+              localStorage.setItem("auth_user", JSON.stringify(user));
+         });
     }
   }
 	
