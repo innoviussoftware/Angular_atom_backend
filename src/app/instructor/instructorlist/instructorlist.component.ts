@@ -26,7 +26,7 @@ export class InstructorlistComponent implements OnInit {
   }
 
   delete(user: User) {
-    if (confirm('are you sure you want to delete this instructor?')) {
+    if (confirm('Are you sure you want to delete this instructor?')) {
       this.userService.delete(user).subscribe();
       this.users = this.users.filter(u => u !== user);
     }
@@ -41,7 +41,7 @@ export class InstructorlistComponent implements OnInit {
     this.userService.update(user, user.id).subscribe();
   }
 
-  updateFeatured(featured,user_id){         
+  updateFeatured(featured,user_id){
     this.userService.updateFeatured(user_id,featured)
       .subscribe(users => {
           this.getUserlist();
