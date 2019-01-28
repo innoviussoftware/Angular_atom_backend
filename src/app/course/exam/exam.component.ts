@@ -39,11 +39,11 @@ export class ExamComponent implements OnInit {
 
 
   updateQuestion(event: any, course_question: CourseQuestion): void {
-    if(course_question.question !== event.target.value){
+    if (course_question.question !== event.target.value) {
       course_question.question = event.target.value;
       this.selected_course_question = course_question;
       this.courseQuestionService.store(course_question)
-      .subscribe(course_question => this.selected_course_question.id = course_question.id);
+        .subscribe(course_question => this.selected_course_question.id = course_question.id);
     }
 
   }
@@ -74,13 +74,12 @@ export class ExamComponent implements OnInit {
   }
 
   addAnswer(course_question: CourseQuestion) {
-    if(!course_question.id){
-      return false;
+    if (course_question.id) {
+      let new_ans = new CourseAnswer();
+      new_ans.course_question_id = course_question.id;
+      this.selected_course_question = course_question;
+      this.selected_course_question.course_answers.push(new_ans);
     }
-    let new_ans = new CourseAnswer();
-    new_ans.course_question_id = course_question.id;
-    this.selected_course_question = course_question;
-    this.selected_course_question.course_answers.push(new_ans);
   }
 
   deleteQuestion(course_question: CourseQuestion): void {

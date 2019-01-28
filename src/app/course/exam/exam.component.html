@@ -59,8 +59,8 @@
           <div class="input-group">
             <input type="text" class="form-control form-control-sm" value="{{ answer.answer }}" (blur)="onBlurAnswer($event, answer)">
             <div class="input-group-append">
-              <div class="input-group-text py-0">
-                <input type="checkbox" [checked]="answer.is_correct" value="1" (change)="onChangeAnswer($event, answer)">
+              <div class="input-group-text py-0" *ngIf="answer.id">
+                <input type="checkbox" [checked]="answer.is_correct" value="1" (change)="onChangeAnswer($event, answer)" disabled="{{ (answer.id) ? '' : 'disabled' }}">
               </div>
               <button class="btn btn-danger btn-sm" type="button" (click)="deleteAnswer(answer,question)" ><i class="mdi mdi-delete-forever"></i></button>
             </div>
