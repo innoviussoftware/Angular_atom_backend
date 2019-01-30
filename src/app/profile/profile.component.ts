@@ -22,7 +22,7 @@ profileForm: FormGroup;
 
   ngOnInit() {
 
-	  this.profileForm = this.formBuilder.group({	      
+	  this.profileForm = this.formBuilder.group({
 	      name: [this.auth_user.name, Validators.required],
 	      last_name: [this.auth_user.last_name, Validators.required],
 	      short_description: [this.auth_user.short_description, Validators.required],
@@ -32,7 +32,7 @@ profileForm: FormGroup;
 	      twitter: [this.auth_user.twitter, Validators.required],
 	      google: [this.auth_user.google, Validators.required],
 	      pinterest: [this.auth_user.pinterest, Validators.required],
-	      skype: [this.auth_user.skype, Validators.required]	      
+	      skype: [this.auth_user.skype, Validators.required]
 	    });
 	    this.id = this.auth_user.id;
   }
@@ -48,18 +48,23 @@ profileForm: FormGroup;
           this.profileForm.controls['image'].setValue(file_upload.path);
           this.userService.update(this.profileForm.value, this.id)
             .subscribe(user => {
+              if(user.id){
         	     localStorage.setItem("auth_user", JSON.stringify(user));
+             }
+
             });
         });
     } else {
       this.profileForm.controls['image'].setValue(null);
       this.userService.update(this.profileForm.value, this.id)
         .subscribe(user => {
+          if(user.id){
               localStorage.setItem("auth_user", JSON.stringify(user));
+            }
          });
     }
   }
-	
+
 	onFileChange(event) {
 	    this.image_upload.delete('image');
 	    if (event.target.files.length > 0) {

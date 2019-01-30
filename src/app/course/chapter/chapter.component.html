@@ -84,7 +84,7 @@
           <a class="dropdown-item" href="javascript:void(0);" (click)="openChapterContentModal(chapter.id)" >Content</a>
           <a class="dropdown-item" href="javascript:void(0);" (click)="openVideoModal(chapter.id)">Video</a>
           <a class="dropdown-item" href="javascript:void(0);" (click)="openImageModal(chapter.id)">Image</a>
-          <a class="dropdown-item" href="javascript:void(0);" (click)="openDocumentModal(chapter.id)">Word, Excel, or PowerPoint document</a>
+          <a class="dropdown-item" href="javascript:void(0);" (click)="openDocumentModal(chapter.id)">Word, Excel or PowerPoint document</a>
         </div>
       </div>
     </div>
@@ -256,7 +256,7 @@
               </div>
               <div class="form-group">
                 <label>Word, Excel, or PowerPoint document</label><span class="text-danger">*</span>
-                <input type="file" accept=".doc,.docx,.pdf,.ppt,.pptx" class="form-control" #fileInput1 />
+                <input type="file" accept=".doc,.docx,.xlsx,.xls,.ppt,.pptx" class="form-control" #fileInput1 />
               </div>
             </div>
           </div>

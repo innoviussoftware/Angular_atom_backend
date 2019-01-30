@@ -24,7 +24,7 @@ export class WebinarsComponent implements OnInit {
   }
 
   delete(webinar: Webinar): void {
-    if (confirm('are you sure?')) {
+    if (confirm('Are you sure you want to delete this webinar ?')) {
       this.webinars = this.webinars.filter(w => w !== webinar);
       this.webinarService.deleteWebinar(webinar).subscribe();
     }

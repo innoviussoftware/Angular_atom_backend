@@ -33,7 +33,8 @@ const routes: Routes = [
 export class AppRoutingModule {
   constructor(private router: Router) {
       this.router.errorHandler = (error: any) => {
-          this.router.navigate(['/page-not-found']); // or redirect to default route
+
+          // this.router.navigate(['/page-not-found']); // or redirect to default route
       }
     }
 }

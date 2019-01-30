@@ -34,7 +34,6 @@ export class EditCourseComponent implements OnInit {
     private courseService: CourseService,
     private categoryService: CategoryService,
     private webinarService: WebinarService,
-
   ) {
     this.id = +this.route.snapshot.paramMap.get('id');
   }
@@ -74,7 +73,7 @@ export class EditCourseComponent implements OnInit {
     this.categoryService.getCategories()
       .subscribe(categories => this.categories = categories);
 
-   
+
 
     this.courseService.getCourse(this.id)
       .subscribe(course => {
