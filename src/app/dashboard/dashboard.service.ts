@@ -93,7 +93,7 @@ export class DashboardService {
       if (error.status == 422) {
         this.messageService.showErrors(error.error);
       } else if(error.status == 403){
-        this.router.navigate(['page-not-permitted'])
+        this.router.navigate(['page-not-permitted']);
       }if(error.status == 401){
         this.authService.logout();
       } else {

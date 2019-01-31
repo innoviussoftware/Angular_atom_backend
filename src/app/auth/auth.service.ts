@@ -18,7 +18,7 @@ export class AuthService {
   isLoggedIn(): boolean { //Check if token is there
     if (localStorage.getItem('auth_token')) {
       return true;
-    } {
+    } else {
       return false;
     }
   }
